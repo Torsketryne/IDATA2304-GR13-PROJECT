@@ -15,13 +15,23 @@ distributed application.
   actuator nodes and sends control commands to them.
 * Graphical User Interface (GUI) - A graphical interface where users of the system can interact with
   it.
+* Node - A single communicating body of either sensors and actuators or control panel functions
 
 ## The underlying transport protocol
+
+The transport-layer protocol being used is TCP. It is a protocol that fits the need for reliability, robustness and control.
+
+Port number 8080 for sensor and actuator nodes
+Port number 1313 for control panels
 
 TODO - what transport-layer protocol do you use? TCP? UDP? What port number(s)? Why did you 
 choose this transport layer protocol?
 
 ## The architecture
+
+The network consists of two types of nodes, capable of connecting and communicating with the nodes from the other type.
+
+The network will be peer-to-peer. Each node will be a client with a socket belonging to either types of node
 
 TODO - show the general architecture of your network. Which part is a server? Who are clients? 
 Do you have one or several servers? Perhaps include a picture here. 
@@ -35,6 +45,8 @@ node type (For example: one subsection for sensor/actuator nodes, one for contro
 
 ## Connection and state
 
+The communication protocol is connection-oriented and stateful. 
+
 TODO - is your communication protocol connection-oriented or connection-less? Is it stateful or 
 stateless? 
 
@@ -44,6 +56,11 @@ TODO - Do you have some specific value types you use in several messages? They y
 them here.
 
 ## Message format
+
+A message in general will be a value as data accompanied with a tag as meta data. For example "Temperature:" 20
+
+Message will be encrypted when sent and decrypted when received by final destination.
+
 
 TODO - describe the general format of all messages. Then describe specific format for each 
 message type in your protocol.
