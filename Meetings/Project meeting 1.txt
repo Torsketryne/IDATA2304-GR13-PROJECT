@@ -1,0 +1,10 @@
+Project meeting 1
+Everyone is present
+
+Theme: Preparatory work.
+
+Planning and discussing about the project, what we should do, how we should work and what the first course of action is.
+
+Create the backend before the frontend
+
+We agreed on this meeting to aim for the grade 'A'
