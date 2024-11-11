@@ -1,5 +1,6 @@
+import java.net.*;
 import java.util.concurrent.*;
-public class Node {
+public class NodeHandler {
 
     private ConcurrentHashMap<Integer, Socket> Nodes = new ConcurrentHashMap<>();
 
