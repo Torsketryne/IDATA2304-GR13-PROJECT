@@ -1,5 +1,6 @@
+import java.net.*;
 import java.util.concurrent.*;
-public class ControlPanel {
+public class ControlPanelHandler {
 
     private ConcurrentHashMap<Integer, Socket> ControlPanels = new ConcurrentHashMap<>();
 
