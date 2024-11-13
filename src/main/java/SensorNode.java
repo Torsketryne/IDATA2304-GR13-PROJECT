@@ -23,7 +23,7 @@ public class SensorNode {
             System.out.println("Error connecting to server: " + e.getMessage());
         }
     }
-
+    // Code is created by GitHub Copilot.
     private String sensorDataString() {
         return String.format("Node ID: %s, Temperature: %.2f, Humidity: %.2f, Light: %.2f, Nitrogen: %.2f",
                 this.nodeId, this.temperature, this.humidity, this.light, this.nitrogen);

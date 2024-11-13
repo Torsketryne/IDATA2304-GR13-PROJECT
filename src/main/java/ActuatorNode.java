@@ -9,7 +9,7 @@ public class ActuatorNode {
     private BufferedReader reader;
 
     public ActuatorNode(){
-        this.nodeId = id;
+        this.nodeId = nodeId;
         try{
             this.socket = new Socket(String.valueOf(ServerSystem.Node_Port), ServerSystem.Panel_Port);
             this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
