@@ -1,12 +1,16 @@
 import java.io.*;
 import java.net.Socket;
-import static java.awt.SystemColor.control;
+import java.util.HashMap;
+import java.util.Map;
+
+
 
 public class ActuatorNode {
     private String nodeId;
     private Socket socket;
     private BufferedWriter writer;
     private BufferedReader reader;
+    private Map<String, Boolean> nodeStatus;
 
     public ActuatorNode(){
         this.nodeId = nodeId;
@@ -14,10 +18,23 @@ public class ActuatorNode {
             this.socket = new Socket(String.valueOf(ServerSystem.Node_Port), ServerSystem.Panel_Port);
             this.writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             this.reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            this.nodeStatus = new HashMap<>();
+            this.initializeActuatorNode();
 
         }catch(IOException e){
             System.out.println("Error connecting to server: " + e.getMessage());
         }
+    }
+
+    // Method to initialize the actuator node
+    private void initializeActuatorNode() {
+        nodeStatus.put("Fan", false);
+        nodeStatus.put("Heater", false);
+    }
+
+    // Method to get the status of the actuator node
+    public Map<String, Boolean> getNodeStatus() {
+        return nodeStatus;
     }
 
     //Method to receive and handle commands from the server
