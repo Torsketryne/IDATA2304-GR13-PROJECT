@@ -1,3 +1,5 @@
+package no.ntnu;
+
 import java.net.*;
 import java.util.concurrent.*;
 public class ControlPanelHandler {

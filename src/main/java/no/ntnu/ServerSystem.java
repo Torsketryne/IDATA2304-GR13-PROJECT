@@ -1,3 +1,5 @@
+package no.ntnu;
+
 import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
@@ -9,15 +11,17 @@ import java.util.concurrent.*;
  * It stores the active Nodes and Panels in a ConcurrentHashMap
  * It also handles the communication between Nodes and Panels
  *
- * @version 1.0
- * @since 2024-10-7
- *
  * Ai as well as some other sources were used to help create this class here are the sources:
  * https://www.geeksforgeeks.org/concurrenthashmap-in-java/
  * https://www.geeksforgeeks.org/introducing-threads-socket-programming-java/
  * https://www.geeksforgeeks.org/socket-programming-in-java/
  * https://dzone.com/articles/breaking-static-dependency
  * I also used the last projects code as a reference to help create this class
+ * TODO: Might seperate the Node and Panel server into seperate classes and maybe create a class for the communication between Nodes and Panels like NodeHandler and no.ntnu.ControlPanelHandler
+ *
+ * @version 1.0
+ * @since 2024-10-7
+ *
  */
 public class ServerSystem {
     public static final int Node_Port = 8080;

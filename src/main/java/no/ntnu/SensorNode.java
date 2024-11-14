@@ -1,3 +1,5 @@
+package no.ntnu;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Random;

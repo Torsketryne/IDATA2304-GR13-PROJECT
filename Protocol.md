@@ -15,7 +15,7 @@ distributed application.
   actuator nodes and sends control commands to them.
 * Graphical User Interface (GUI) - A graphical interface where users of the system can interact with
   it.
-* NodeServer - A single communicating body of either sensors and actuators or control panel functions
+* no.ntnu.NodeServer - A single communicating body of either sensors and actuators or control panel functions
 
 ## The underlying transport protocol
 

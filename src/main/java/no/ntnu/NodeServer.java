@@ -1,3 +1,5 @@
+package no.ntnu;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
