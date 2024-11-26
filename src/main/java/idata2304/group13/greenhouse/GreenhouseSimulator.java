@@ -65,8 +65,18 @@ public class GreenhouseSimulator {
     }
   }
 
+  /**
+   Start the real communication with the greenhouse nodes using TCP.
+   */
   private void initiateRealCommunication() {
-    // TODO - here you can set up the TCP or UDP communication
+    new Thread(() -> {
+      GreenhouseServer server = new GreenhouseServer();
+      server.start();}).start();
+
+    for(SensorActuatorNode node : nodes.values()) {
+      GreenhouseClient client = new GreenhouseClient(node);
+      node.setClient(client);
+    }
   }
 
   private void initiateFakePeriodicSwitches() {
