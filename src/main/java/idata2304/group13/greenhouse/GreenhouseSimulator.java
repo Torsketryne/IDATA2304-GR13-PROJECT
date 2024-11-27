@@ -75,7 +75,6 @@ public class GreenhouseSimulator {
 
     for(SensorActuatorNode node : nodes.values()) {
       GreenhouseClient client = new GreenhouseClient(node);
-      node.setClient(client);
     }
   }
 

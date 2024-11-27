@@ -5,17 +5,20 @@ import java.util.concurrent.*;
 
 /**
  * A server for the greenhouse system.
- *
+ * <p>
  * Using ExecutorService to make sure the class can be shut down properly.
  * While also allowing for multiple threads.
+ * <p>
+ * I have used the following sources to help me with this class:
+ * <a href="https://coderanch.com/t/709877/java/TCP-server-connections-executor-service">Excecutor usage for TCP with multi thread functions</a>
+ * <a href="https://stackoverflow.com/questions/12588476/multithreading-socket-communication-client-server">Multhithreading communication for client server communication</a>
  *
- * https://coderanch.com/t/709877/java/TCP-server-connections-executor-service
- * https://stackoverflow.com/questions/12588476/multithreading-socket-communication-client-server
+ * @author MoldyDaniel
  */
 public class GreenhouseServer {
-    private static final int PORT = 12345;
+    private static final int PORT = 1313;
     private ServerSocket serverSocket;
-    private ExecutorService executor;
+    private final ExecutorService executor;
 
     /**
      * Create a new server.
