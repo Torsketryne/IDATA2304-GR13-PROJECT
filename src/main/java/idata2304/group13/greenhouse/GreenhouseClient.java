@@ -17,7 +17,7 @@ public class GreenhouseClient {
      * Also, the socket and streams for communication.
      */
     private static final String HOST = "localhost";
-    private static final int PORT = 8080;
+    private static final int PORT = 1313;
     private Socket clientSocket;
     private BufferedReader in;
     private PrintWriter out;

@@ -76,6 +76,7 @@ public class GreenhouseSimulator {
     for(SensorActuatorNode node : nodes.values()) {
       GreenhouseClient client = new GreenhouseClient(node);
     }
+    System.out.println("Nodes size: " + nodes.size());
   }
 
   private void initiateFakePeriodicSwitches() {
