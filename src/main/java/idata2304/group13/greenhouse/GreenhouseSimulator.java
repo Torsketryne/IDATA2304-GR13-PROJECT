@@ -12,6 +12,7 @@ import idata2304.group13.tools.Logger;
  */
 public class GreenhouseSimulator {
   private final Map<Integer, SensorActuatorNode> nodes = new HashMap<>();
+  private GreenhouseServer server;
 
   private final List<PeriodicSwitch> periodicSwitches = new LinkedList<>();
   private final boolean fake;
@@ -70,7 +71,7 @@ public class GreenhouseSimulator {
    */
   private void initiateRealCommunication() {
     new Thread(() -> {
-      GreenhouseServer server = new GreenhouseServer();
+      server = new GreenhouseServer();
       server.start();}).start();
 
     for(SensorActuatorNode node : nodes.values()) {
@@ -92,6 +93,7 @@ public class GreenhouseSimulator {
     for (SensorActuatorNode node : nodes.values()) {
       node.stop();
     }
+    Logger.info("Simulator stopped");
   }
 
   private void stopCommunication() {
@@ -101,6 +103,7 @@ public class GreenhouseSimulator {
       }
     } else {
       // TODO - here you stop the TCP/UDP communication
+      server.stopServer();
     }
   }
 

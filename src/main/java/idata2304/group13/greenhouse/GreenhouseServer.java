@@ -70,7 +70,7 @@ public class GreenhouseServer {
     }
 
 
-        private void stopServer() {
+        public void stopServer() {
             try {
                 serverSocket.close();
             } catch (IOException e) {
