@@ -12,10 +12,10 @@ import idata2304.group13.tools.Logger;
  * debugger (JavaFX modules not found)
  */
 public class ControlPanelStarter {
-  private final boolean fake;
+  private final int port;
 
-  public ControlPanelStarter(boolean fake) {
-    this.fake = fake;
+  public ControlPanelStarter(int port) {
+    this.port = port;
   }
 
   /**
@@ -28,35 +28,26 @@ public class ControlPanelStarter {
    *             Apply the changes.
    */
   public static void main(String[] args) {
-    boolean fake = false;// make it true to test in fake mode
-    if (args.length == 1 && "fake".equals(args[0])) {
-      fake = true;
-      Logger.info("Using FAKE events");
-    }
-    ControlPanelStarter starter = new ControlPanelStarter(fake);
+    int port = validArgsCheck(args);
+
+    ControlPanelStarter starter = new ControlPanelStarter(port);
     starter.start();
   }
 
   private void start() {
     ControlPanelLogic logic = new ControlPanelLogic();
-    CommunicationChannel channel = initiateCommunication(logic, fake);
+    CommunicationChannel channel = initiateCommunication(logic, port);
     ControlPanelApplication.startApp(logic, channel);
     // This code is reached only after the GUI-window is closed
     Logger.info("Exiting the control panel application");
     stopCommunication();
   }
 
-  private CommunicationChannel initiateCommunication(ControlPanelLogic logic, boolean fake) {
-    CommunicationChannel channel;
-    if (fake) {
-      channel = initiateFakeSpawner(logic);
-    } else {
-      channel = initiateSocketCommunication(logic);
-    }
-    return channel;
+  private CommunicationChannel initiateCommunication(ControlPanelLogic logic, int port) {
+    return initiateSocketCommunication(logic, port);
   }
 
-  private CommunicationChannel initiateSocketCommunication(ControlPanelLogic logic) {
+  private CommunicationChannel initiateSocketCommunication(ControlPanelLogic logic, int port) {
     // TODO - here you initiate TCP/UDP socket communication
     // You communication class(es) may want to get reference to the logic and call necessary
     // logic methods when events happen (for example, when sensor data is received)
@@ -89,6 +80,21 @@ public class ControlPanelStarter {
     spawner.advertiseSensorData("4;temperature=25.4 °C,temperature=27.0 °C,humidity=82 %", START_DELAY + 14);
     spawner.advertiseSensorData("4;temperature=25.4 °C,temperature=27.0 °C,humidity=82 %", START_DELAY + 16);
     return spawner;
+  }
+
+  private static int validArgsCheck(String[] args) {
+    int port = 1313;
+    if (args.length == 0) {
+      Logger.info("Using default port number: 1313");
+    } else if (args.length == 1 && args[0].trim().matches("\\d+")) {
+      port = Integer.parseInt(args[0]);
+      Logger.info("Using provided port number: " + port);
+    } else if (args.length > 1){
+      throw new IllegalArgumentException("There cannot be more program arguments than one. Type only in port number or leave empty for default port");
+    } else {
+      throw new IllegalArgumentException("Program argument not understood. Please enter in either a number to be used as port number or nothing to use default port number");
+    }
+    return port;
   }
 
   private void stopCommunication() {
