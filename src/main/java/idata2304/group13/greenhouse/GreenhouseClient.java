@@ -47,7 +47,11 @@ public class GreenhouseClient {
      */
 
     public void sendMessage(String message) {
-        out.println(message);
+        try {
+            out.println(message);
+        } catch (Exception e) {
+            System.err.println("Error while sending message: " + e.getMessage());
+        }
     }
 
     /**
