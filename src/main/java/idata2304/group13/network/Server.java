@@ -3,8 +3,6 @@ package idata2304.group13.network;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
-import java.util.MissingResourceException;
 
 public class Server {
 
@@ -14,10 +12,11 @@ public class Server {
   public Server() {}
 
   public static void main(String[] args) {
-
+    Server server = new Server();
+    server.run();
   }
 
-  public void run() throws IOException {
+  public void run(){
     this.serverSocket = openListeningSocket();
 
     boolean running = true;
