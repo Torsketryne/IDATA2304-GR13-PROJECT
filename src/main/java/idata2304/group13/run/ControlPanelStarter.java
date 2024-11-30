@@ -5,6 +5,8 @@ import idata2304.group13.controlpanel.ControlPanelLogic;
 import idata2304.group13.controlpanel.FakeCommunicationChannel;
 import idata2304.group13.gui.controlpanel.ControlPanelApplication;
 import idata2304.group13.tools.Logger;
+import java.io.IOException;
+import java.net.ServerSocket;
 
 /**
  * Starter class for the control panel.
@@ -44,6 +46,13 @@ public class ControlPanelStarter {
   }
 
   private CommunicationChannel initiateCommunication(ControlPanelLogic logic, int port) {
+    while (true) {
+      try {
+        ServerSocket serverSocket = new ServerSocket(port);
+      } catch (IOException ioe) {
+        System.err.println("Error opening server socket: " + ioe.getMessage());
+      }
+    }
     return initiateSocketCommunication(logic, port);
   }
 

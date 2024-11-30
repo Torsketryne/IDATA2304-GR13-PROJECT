@@ -3,6 +3,8 @@ package idata2304.group13.controlpanel;
 import static idata2304.group13.tools.Parser.parseDoubleOrError;
 import static idata2304.group13.tools.Parser.parseIntegerOrError;
 
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
@@ -16,19 +18,36 @@ import idata2304.group13.tools.Logger;
  * In practice - spawn some events at specified time (specified delay).
  * Note: this class is used only for debugging, you can remove it in your final project!
  */
-public class SocketCommunicationChannel implements CommunicationChannel {
+public class SocketCommunicationChannel implements CommunicationChannel, Runnable {
 
   private final ControlPanelLogic logic;
+  private final int port;
+  private ServerSocket serverSocket;
 
   /**
    * Create a new real communication channel.
    *
    * @param logic The application logic of the control panel node.
    */
-  public SocketCommunicationChannel(ControlPanelLogic logic) {
+  public SocketCommunicationChannel(ControlPanelLogic logic, int port) {
     this.logic = logic;
+    this.port = port;
   }
 
+  /**
+   *
+   */
+  @Override
+  public void run() {
+
+
+  }
+
+  /**
+   *
+   * @param specification
+   * @return
+   */
   private SensorActuatorNodeInfo createSensorNodeInfoFrom(String specification) {
     if (specification == null || specification.isEmpty()) {
       throw new IllegalArgumentException("Node specification can't be empty");
