@@ -70,12 +70,16 @@ public class GreenhouseServer {
     }
 
 
-        private void stopServer() {
-            try {
+    public void stopServer() {
+        try {
+            if (serverSocket != null){
                 serverSocket.close();
-            } catch (IOException e) {
-                System.err.println("Error while shutting down server: " + e.getMessage());
+            }else {
+                System.out.println("Server socket is already closed");
             }
-            executor.shutdown();
+        } catch (IOException e) {
+            System.err.println("Error while shutting down server: " + e.getMessage());
+        }
+        executor.shutdown();
         }
     }

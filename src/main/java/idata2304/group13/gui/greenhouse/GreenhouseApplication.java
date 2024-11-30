@@ -35,7 +35,7 @@ public class GreenhouseApplication extends Application implements NodeStateListe
 
   private void closeApplication() {
     Logger.info("Closing Greenhouse application...");
-    simulator.stop();
+    simulator.stopCommunication();
     try {
       stop();
     } catch (Exception e) {

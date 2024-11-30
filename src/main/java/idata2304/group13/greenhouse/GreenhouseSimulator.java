@@ -14,7 +14,9 @@ public class GreenhouseSimulator {
   private final Map<Integer, SensorActuatorNode> nodes = new HashMap<>();
 
   private final List<PeriodicSwitch> periodicSwitches = new LinkedList<>();
+  private final List<GreenhouseClient> clients = new LinkedList<>();
   private final boolean fake;
+  private GreenhouseServer server;
 
   /**
    * Create a greenhouse simulator.
@@ -75,6 +77,7 @@ public class GreenhouseSimulator {
 
     for(SensorActuatorNode node : nodes.values()) {
       GreenhouseClient client = new GreenhouseClient(node);
+      clients.add(client);
     }
     System.out.println("Nodes size: " + nodes.size());
   }
@@ -84,23 +87,31 @@ public class GreenhouseSimulator {
     periodicSwitches.add(new PeriodicSwitch("Heater DJ", nodes.get(2), 7, 8000));
   }
 
-  /**
-   * Stop the simulation of the greenhouse - all the nodes in it.
-   */
-  public void stop() {
-    stopCommunication();
-    for (SensorActuatorNode node : nodes.values()) {
-      node.stop();
-    }
-  }
 
-  private void stopCommunication() {
+
+
+  /**
+   * Stop the communication with the nodes.
+   * This method is called when the simulation is stopped.
+   * It stops the communication with the nodes and closes the server socket.
+   */
+  public void stopCommunication() {
     if (fake) {
       for (PeriodicSwitch periodicSwitch : periodicSwitches) {
         periodicSwitch.stop();
       }
     } else {
-      // TODO - here you stop the TCP/UDP communication
+      for (SensorActuatorNode node : nodes.values()) {
+        Logger.info("Stopping node " + node.getId());
+        node.stop();
+      }
+      for (GreenhouseClient client : clients) {
+        Logger.info("Closing client connection");
+        client.close();
+      }
+    }
+    if (server != null) {
+      server.stopServer();
     }
   }
 

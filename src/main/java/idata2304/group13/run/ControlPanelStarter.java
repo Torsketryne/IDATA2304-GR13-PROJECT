@@ -3,6 +3,10 @@ package idata2304.group13.run;
 import idata2304.group13.controlpanel.CommunicationChannel;
 import idata2304.group13.controlpanel.ControlPanelLogic;
 import idata2304.group13.controlpanel.FakeCommunicationChannel;
+import idata2304.group13.controlpanel.SocketCommunicationChannel;
+import idata2304.group13.greenhouse.GreenhouseClient;
+import idata2304.group13.greenhouse.GreenhouseServer;
+import idata2304.group13.greenhouse.GreenhouseSimulator;
 import idata2304.group13.gui.controlpanel.ControlPanelApplication;
 import idata2304.group13.tools.Logger;
 import java.io.IOException;
@@ -15,6 +19,8 @@ import java.net.ServerSocket;
  */
 public class ControlPanelStarter {
   private final int port;
+
+    private GreenhouseSimulator simulator;
 
   public ControlPanelStarter(int port) {
     this.port = port;
@@ -46,21 +52,29 @@ public class ControlPanelStarter {
   }
 
   private CommunicationChannel initiateCommunication(ControlPanelLogic logic, int port) {
-    while (true) {
+    //while (true) {
       try {
         ServerSocket serverSocket = new ServerSocket(port);
       } catch (IOException ioe) {
         System.err.println("Error opening server socket: " + ioe.getMessage());
       }
-    }
-    return initiateSocketCommunication(logic, port);
+      return initiateSocketCommunication(logic, port);
+    //}
   }
 
   private CommunicationChannel initiateSocketCommunication(ControlPanelLogic logic, int port) {
     // TODO - here you initiate TCP/UDP socket communication
     // You communication class(es) may want to get reference to the logic and call necessary
     // logic methods when events happen (for example, when sensor data is received)
-    return null;
+
+    GreenhouseSimulator simulator = new GreenhouseSimulator(false);
+    simulator.initialize();
+    simulator.start();
+
+    CommunicationChannel realChannel = new SocketCommunicationChannel(logic, port);
+    ControlPanelApplication.startApp(logic, realChannel);
+
+    return realChannel;
   }
 
   private CommunicationChannel initiateFakeSpawner(ControlPanelLogic logic) {
@@ -108,5 +122,6 @@ public class ControlPanelStarter {
 
   private void stopCommunication() {
     // TODO - here you stop the TCP/UDP socket communication
+    simulator.stopCommunication();
   }
 }
