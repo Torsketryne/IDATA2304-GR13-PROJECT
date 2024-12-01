@@ -1,5 +1,6 @@
 package idata2304.group13.network;
 
+import idata2304.group13.tools.MessageHandler;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,6 +9,7 @@ public class Server {
 
   private static final int PORT = 1313;
   private ServerSocket serverSocket;
+  private MessageHandler messageHandler;
 
   public Server() {}
 
@@ -20,11 +22,12 @@ public class Server {
     this.serverSocket = openListeningSocket();
     if (serverSocket != null) {
       NodeControlPanelRelations relationships = new NodeControlPanelRelations();
+      messageHandler = new MessageHandler();
       //boolean running = true;
       while (true) {
         Socket socket = acceptNextClient();
         if (socket != null) {
-          Thread handleThread = new Thread(new ClientHandler(socket, relationships));
+          Thread handleThread = new Thread(new ClientHandler(socket, relationships, messageHandler));
           handleThread.start();
         }
         //running = stopServer();

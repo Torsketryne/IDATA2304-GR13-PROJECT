@@ -1,6 +1,8 @@
 package idata2304.group13.greenhouse;
+import idata2304.group13.tools.Logger;
 import java.io.*;
 import java.net.*;
+import java.util.Random;
 
 /**
  * A client for the greenhouse system.
@@ -21,12 +23,16 @@ public class GreenhouseClient {
     private Socket clientSocket;
     private BufferedReader in;
     private PrintWriter out;
+    private String nodeId;
 
     /**
      * Create a new client for the greenhouse system.
      */
     public GreenhouseClient() {
-
+        this.nodeId = "n" + new Random().nextInt(999);
+    }
+    public GreenhouseClient(int customId) {
+        this.nodeId = "n" + customId;
     }
 
     public void run() {
@@ -34,9 +40,22 @@ public class GreenhouseClient {
             clientSocket = new Socket(HOST, PORT);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             out = new PrintWriter(clientSocket.getOutputStream(), true);
-            System.out.println("Connected to server at " + HOST + ":" + PORT);
+            Logger.info("Connected to server at " + HOST + ":" + PORT);
+            connectToPanel("c0");
         } catch (IOException e) {
-            System.err.println("Error while running client: " + e.getMessage());
+            Logger.error("Error while running client: " + e.getMessage());
+        }
+    }
+
+    public void run(String panelId) {
+        try {
+            clientSocket = new Socket(HOST, PORT);
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            out = new PrintWriter(clientSocket.getOutputStream(), true);
+            Logger.info("Connected to server at " + HOST + ":" + PORT);
+            connectToPanel(panelId);
+        } catch (IOException e) {
+            Logger.error("Error while running client: " + e.getMessage());
         }
     }
 
@@ -69,7 +88,7 @@ public class GreenhouseClient {
     }
 
     public void connectToPanel(String panelId) {
-
+        sendMessage("MessageType:Connect;" + "Source:" + this.nodeId + ";" + "Dest:" + panelId);
     }
 
     /**

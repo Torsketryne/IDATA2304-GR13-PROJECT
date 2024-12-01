@@ -14,6 +14,7 @@ import idata2304.group13.tools.Logger;
  */
 public class ControlPanelStarter {
   private final boolean fake;
+  private static int count = 0;
 
   public ControlPanelStarter(boolean fake) {
     this.fake = fake;
@@ -58,10 +59,9 @@ public class ControlPanelStarter {
   }
 
   private CommunicationChannel initiateSocketCommunication(ControlPanelLogic logic) {
-    // TODO - here you initiate TCP/UDP socket communication
-    // You communication class(es) may want to get reference to the logic and call necessary
-    // logic methods when events happen (for example, when sensor data is received)
-    return new SocketCommunicationChannel(logic);
+    SocketCommunicationChannel channel = new SocketCommunicationChannel(logic, count);
+    count++;
+    return channel;
   }
 
   private CommunicationChannel initiateFakeSpawner(ControlPanelLogic logic) {

@@ -6,7 +6,11 @@ import java.util.List;
 
 public class NodeControlPanelRelations {
 
-  private HashMap<String, String> nodesToPanelRelations;
+  private final HashMap<String, String> nodesToPanelRelations;
+
+  public NodeControlPanelRelations() {
+    this.nodesToPanelRelations = new HashMap<>();
+  }
 
   public void addRelation(String nodeId, String panelId) {
     this.nodesToPanelRelations.put(nodeId, panelId);

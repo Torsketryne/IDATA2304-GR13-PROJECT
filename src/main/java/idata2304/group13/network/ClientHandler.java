@@ -1,5 +1,7 @@
 package idata2304.group13.network;
 
+import idata2304.group13.tools.MessageHandler;
+import idata2304.group13.tools.ProcessMessage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -13,12 +15,16 @@ public class ClientHandler implements Runnable{
   private Socket socket;
   private BufferedReader socketReader;
   private PrintWriter socketWriter;
+  private MessageHandler messageHandler;
+  private ProcessMessage processMessage;
   private NodeControlPanelRelations relationships;
   private HashMap<String, String> commandBuffer;
 
-  public ClientHandler(Socket socket, NodeControlPanelRelations relationships) {
+  public ClientHandler(Socket socket, NodeControlPanelRelations relationships, MessageHandler messageHandler) {
     this.socket = socket;
     this.relationships = relationships;
+    this.messageHandler = messageHandler;
+    this.processMessage = new ProcessMessage(relationships);
     initializeStreams(socket);
   }
 
@@ -38,6 +44,8 @@ public class ClientHandler implements Runnable{
 
     do {
       clientCommand = readClientMessage();
+      processMessage.ProcessMessage(messageHandler.parseMessage(clientCommand));
+
 
       if (!clientCommand.isEmpty()) {
         writeResponseToClient(clientCommand);

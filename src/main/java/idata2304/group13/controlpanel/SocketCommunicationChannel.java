@@ -2,6 +2,7 @@ package idata2304.group13.controlpanel;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Random;
 
 /**
  * A real communication channel. Emulates the node discovery (over the Internet).
@@ -14,6 +15,7 @@ public class SocketCommunicationChannel implements CommunicationChannel{
   private static final int PORT = 1313;
   private static final String HOST = "localhost";
   private Socket socket;
+  private String panelId;
 
   /**
    * Create a new real communication channel.
@@ -22,6 +24,12 @@ public class SocketCommunicationChannel implements CommunicationChannel{
    */
   public SocketCommunicationChannel(ControlPanelLogic logic) {
     this.logic = logic;
+    this.panelId = "c" + new Random().nextInt(999);
+  }
+
+  public SocketCommunicationChannel(ControlPanelLogic logic, int customId) {
+    this.logic = logic;
+    this.panelId = "c" + customId;
   }
 
   @Override

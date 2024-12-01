@@ -16,6 +16,7 @@ public class GreenhouseSimulator {
   private final List<GreenhouseClient> clients = new LinkedList<>();
   private final List<PeriodicSwitch> periodicSwitches = new LinkedList<>();
   private final boolean fake;
+  private static int count = 0;
 
   /**
    * Create a greenhouse simulator.
@@ -78,7 +79,8 @@ public class GreenhouseSimulator {
    */
   private void initiateRealCommunication() {
     for(SensorActuatorNode node : nodes.values()) {
-      GreenhouseClient client = new GreenhouseClient();
+      GreenhouseClient client = new GreenhouseClient(count);
+      count++;
       client.run();
       clients.add(client);
       client.sendMessage("Hello Greenhouse");

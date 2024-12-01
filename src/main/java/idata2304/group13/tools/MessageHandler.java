@@ -14,7 +14,7 @@ public class MessageHandler {
      * @param message The message to parse
      * @return A map of key-value pairs
      */
-    public static Map<String, String> parseMessage(String message) {
+    public Map<String, String> parseMessage(String message) {
         Map<String, String> parsedData = new HashMap<>();
         String[] data = message.split(";");
 
