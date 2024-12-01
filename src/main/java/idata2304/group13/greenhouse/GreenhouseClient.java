@@ -82,5 +82,4 @@ public class GreenhouseClient {
             System.err.println("Error while closing socket: " + e.getMessage());
         }
     }
-
 }
