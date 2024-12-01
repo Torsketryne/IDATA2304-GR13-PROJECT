@@ -68,6 +68,10 @@ public class GreenhouseClient {
         }
     }
 
+    public void connectToPanel(String panelId) {
+
+    }
+
     /**
      * Close the connection to the server.
      */

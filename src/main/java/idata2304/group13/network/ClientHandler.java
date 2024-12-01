@@ -13,10 +13,12 @@ public class ClientHandler implements Runnable{
   private Socket socket;
   private BufferedReader socketReader;
   private PrintWriter socketWriter;
+  private NodeControlPanelRelations relationships;
   private HashMap<String, String> commandBuffer;
 
-  public ClientHandler(Socket socket) {
+  public ClientHandler(Socket socket, NodeControlPanelRelations relationships) {
     this.socket = socket;
+    this.relationships = relationships;
     initializeStreams(socket);
   }
 

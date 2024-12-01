@@ -19,11 +19,12 @@ public class Server {
   public void run(){
     this.serverSocket = openListeningSocket();
     if (serverSocket != null) {
+      NodeControlPanelRelations relationships = new NodeControlPanelRelations();
       //boolean running = true;
       while (true) {
         Socket socket = acceptNextClient();
         if (socket != null) {
-          Thread handleThread = new Thread(new ClientHandler(socket));
+          Thread handleThread = new Thread(new ClientHandler(socket, relationships));
           handleThread.start();
         }
         //running = stopServer();
