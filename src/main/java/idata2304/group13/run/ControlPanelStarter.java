@@ -3,6 +3,7 @@ package idata2304.group13.run;
 import idata2304.group13.controlpanel.CommunicationChannel;
 import idata2304.group13.controlpanel.ControlPanelLogic;
 import idata2304.group13.controlpanel.FakeCommunicationChannel;
+import idata2304.group13.controlpanel.SocketCommunicationChannel;
 import idata2304.group13.gui.controlpanel.ControlPanelApplication;
 import idata2304.group13.tools.Logger;
 
@@ -60,7 +61,7 @@ public class ControlPanelStarter {
     // TODO - here you initiate TCP/UDP socket communication
     // You communication class(es) may want to get reference to the logic and call necessary
     // logic methods when events happen (for example, when sensor data is received)
-    return null;
+    return new SocketCommunicationChannel(logic);
   }
 
   private CommunicationChannel initiateFakeSpawner(ControlPanelLogic logic) {

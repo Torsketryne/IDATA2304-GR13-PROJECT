@@ -31,7 +31,7 @@ public class ClientHandler implements Runnable{
 
   @Override
   public void run() {
-    System.out.println("thread " + Thread.currentThread().getName() + " is now running");
+    System.out.println(Thread.currentThread().getName() + " is now running");
     String clientCommand;
 
     do {
