@@ -22,12 +22,12 @@ public class NodeControlPanelRelations {
 
   public List getPanelPartners(String panelId) {
     List<String> allNodeIds = new ArrayList<>(this.nodesToPanelRelations.keySet());
-    List<String> assosiatedNodeIds = new ArrayList();
+    List<String> associatedNodeIds = new ArrayList<>();
     for (String nodeId : allNodeIds) {
       if (nodeId.equals(getNodePartner(panelId))) {
-        assosiatedNodeIds.add(nodeId);
+        associatedNodeIds.add(nodeId);
       }
     }
-    return assosiatedNodeIds;
+    return associatedNodeIds;
   }
 }
