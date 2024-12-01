@@ -20,7 +20,7 @@ public class Server {
     this.serverSocket = openListeningSocket();
 
     boolean running = true;
-    while(running) {
+    while(true) {
       Socket socket = acceptNextClient();
       if (socket != null) {
         Thread handleThread = new Thread(new ClientHandler(socket));
@@ -55,6 +55,7 @@ public class Server {
     Socket socket = null;
     try {
       socket = serverSocket.accept();
+      System.out.println("New client connected");
     } catch (IOException ioe) {
       System.err.println("Failed to accept a client: " + ioe);
     }
