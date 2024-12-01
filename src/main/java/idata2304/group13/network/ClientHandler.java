@@ -39,6 +39,7 @@ public class ClientHandler implements Runnable{
 
       if (!clientCommand.isEmpty()) {
         writeResponseToClient(clientCommand);
+        System.out.println(clientCommand);
       }
     } while(clientCommand != null);
   }

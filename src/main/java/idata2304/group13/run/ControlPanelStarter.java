@@ -38,7 +38,7 @@ public class ControlPanelStarter {
     starter.start();
   }
 
-  private void start() {
+  public void start() {
     ControlPanelLogic logic = new ControlPanelLogic();
     CommunicationChannel channel = initiateCommunication(logic, fake);
     ControlPanelApplication.startApp(logic, channel);

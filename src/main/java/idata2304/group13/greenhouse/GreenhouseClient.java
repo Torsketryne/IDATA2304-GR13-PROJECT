@@ -24,10 +24,12 @@ public class GreenhouseClient {
 
     /**
      * Create a new client for the greenhouse system.
-     *
-     * @param node The node to connect to.
      */
-    public GreenhouseClient(SensorActuatorNode node) {
+    public GreenhouseClient() {
+
+    }
+
+    public void run() {
         try {
             clientSocket = new Socket(HOST, PORT);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -37,8 +39,6 @@ public class GreenhouseClient {
             System.err.println("Error while running client: " + e.getMessage());
         }
     }
-
-
 
     /**
      * Send a message to the server.
