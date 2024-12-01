@@ -18,15 +18,16 @@ public class Server {
 
   public void run(){
     this.serverSocket = openListeningSocket();
-
-    boolean running = true;
-    while(true) {
-      Socket socket = acceptNextClient();
-      if (socket != null) {
-        Thread handleThread = new Thread(new ClientHandler(socket));
-        handleThread.start();
+    if (serverSocket != null) {
+      //boolean running = true;
+      while (true) {
+        Socket socket = acceptNextClient();
+        if (socket != null) {
+          Thread handleThread = new Thread(new ClientHandler(socket));
+          handleThread.start();
+        }
+        //running = stopServer();
       }
-      running = stopServer();
     }
   }
 

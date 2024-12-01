@@ -13,7 +13,7 @@ import idata2304.group13.tools.Logger;
 public class GreenhouseSimulator {
   private final Map<Integer, SensorActuatorNode> nodes = new HashMap<>();
   private GreenhouseServer server;
-
+  private final List<GreenhouseClient> clients = new LinkedList<>();
   private final List<PeriodicSwitch> periodicSwitches = new LinkedList<>();
   private final boolean fake;
 
@@ -43,6 +43,13 @@ public class GreenhouseSimulator {
     nodes.put(node.getId(), node);
   }
 
+  public static void main(String[] args) {
+    GreenhouseSimulator greenhouseSimulator = new GreenhouseSimulator(false);
+
+    greenhouseSimulator.initialize();
+    greenhouseSimulator.start();
+  }
+
   /**
    * Start a simulation of a greenhouse - all the sensor and actuator nodes inside it.
    */
@@ -70,12 +77,11 @@ public class GreenhouseSimulator {
    Start the real communication with the greenhouse nodes using TCP.
    */
   private void initiateRealCommunication() {
-    new Thread(() -> {
-      server = new GreenhouseServer();
-      server.start();}).start();
-
     for(SensorActuatorNode node : nodes.values()) {
-      GreenhouseClient client = new GreenhouseClient(node);
+      GreenhouseClient client = new GreenhouseClient();
+      client.run();
+      clients.add(client);
+      client.sendMessage("Hello Greenhouse");
     }
     System.out.println("Nodes size: " + nodes.size());
   }
