@@ -55,6 +55,11 @@ public class Sensor {
     ensureValueBoundsAndPrecision(newValue);
   }
 
+  /**
+   * Ensure the new value is within the allowed bounds and has the correct precision.
+   *
+   * @param newValue The new value to be checked and adjusted if necessary
+   */
   private void ensureValueBoundsAndPrecision(double newValue) {
     newValue = roundToTwoDecimals(newValue);
     if (newValue < min) {
@@ -65,10 +70,21 @@ public class Sensor {
     reading.setValue(newValue);
   }
 
+  /**
+   * Round a value to two decimal places.
+   *
+   * @param value The value to be rounded
+   * @return The rounded value
+   */
   private double roundToTwoDecimals(double value) {
     return Math.round(value * 100.0) / 100.0;
   }
 
+  /**
+   * Generate a realistic noise value to simulate sensor reading fluctuations.
+   *
+   * @return A noice value in the range [-1%..+1%] of the sensor's range
+   */
   private double generateRealisticNoise() {
     final double wholeRange = max - min;
     final double onePercentOfRange = wholeRange / 100.0;
@@ -86,6 +102,11 @@ public class Sensor {
     ensureValueBoundsAndPrecision(newValue);
   }
 
+  /**
+   * Return a string representation of the sensor.
+   *
+   * @return A string representation of the sensor reading
+   */
   @Override
   public String toString() {
     return reading.toString();
