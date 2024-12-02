@@ -15,77 +15,71 @@ distributed application.
   actuator nodes and sends control commands to them.
 * Graphical User Interface (GUI) - A graphical interface where users of the system can interact with
   it.
-* no.ntnu.NodeServer - A single communicating body of either sensors and actuators or control panel functions
+* metadata - Key or identifier. Metadata defines what its associated data means. 
+For example temperature could have the metadata Celsius and data 23
 
 ## The underlying transport protocol
 
 The transport-layer protocol being used is TCP. It is a protocol that fits the need for reliability, robustness and control.
 
-Port number 8080 for sensor and actuator nodes
-Port number 1313 for control panels
-
-TODO - what transport-layer protocol do you use? TCP? UDP? What port number(s)? Why did you 
-choose this transport layer protocol?
+Port number 1313 for the interconnecting server
 
 ## The architecture
 
-The network consists of two types of nodes, capable of connecting and communicating with the nodes from the other type.
+The network consists a server and two types of nodes, capable of connecting to the server 
+and communicating through the server to other nodes from the other type.
 
-The network will be peer-to-peer. Each node will be a client with a socket belonging to either types of node
+The network will be client-server. Each node will be a client connecting to a server with the use of sockets
 
-TODO - show the general architecture of your network. Which part is a server? Who are clients? 
-Do you have one or several servers? Perhaps include a picture here. 
+There is only one server. There can be multiple of each types of nodes.
+The two types of nodes are SensorActuatorNodes and ControlPanel
 
+When a node connects to the server, a new thread with a client handler will be created to handle 
+the node while the server keeps scouting for new nodes
 
 ## The flow of information and events
 
-TODO - describe what each network node does and when. Some periodic events? Some reaction on 
-incoming packets? Perhaps split into several subsections, where each subsection describes one 
-node type (For example: one subsection for sensor/actuator nodes, one for control panel nodes).
+A node can connect to the server and send a command for creating a relationship between itself
+and a different node of the other type. A node can then send commands to the server, which will in turn
+interpret them and run a corresponding function on the paired node
+
+Commands are given in a specific form always starting with MessageType:<Type of message>;
+The semicolon separate values with their metadata
 
 ## Connection and state
 
-The communication protocol is connection-oriented and stateful. 
-
-TODO - is your communication protocol connection-oriented or connection-less? Is it stateful or 
-stateless? 
+The communication protocol is connection-oriented and stateful.
 
 ## Types, constants
 
-TODO - Do you have some specific value types you use in several messages? They you can describe 
-them here.
+All commands start with MessageType. When the command processor gets a command it will try 
+to understand the command by first checking what type of command it is.
+Different message types illicit different actions
 
 ## Message format
 
-A message in general will be a value as data accompanied with a tag as meta data. For example "Temperature:" 20
-
-Message will be encrypted when sent and decrypted when received by final destination.
-
-
-TODO - describe the general format of all messages. Then describe specific format for each 
-message type in your protocol.
+A message in general will be a value as data accompanied by a tag as metadata. For example "Temperature:" 20
 
 ### Error messages
 
-TODO - describe the possible error messages that nodes can send in your system.
+IOException.
 
 ## An example scenario
 
-TODO - describe a typical scenario. How would it look like from communication perspective? When 
-are connections established? Which packets are sent? How do nodes react on the packets? An 
-example scenario could be as follows:
-1. A sensor node with ID=1 is started. It has a temperature sensor, two humidity sensors. It can
-   also open a window.
-2. A sensor node with ID=2 is started. It has a single temperature sensor and can control two fans
-   and a heater.
-3. A control panel node is started.
-4. Another control panel node is started.
-5. A sensor node with ID=3 is started. It has a two temperature sensors and no actuators.
-6. After 5 seconds all three sensor/actuator nodes broadcast their sensor data.
-7. The user of the first-control panel presses on the button "ON" for the first fan of
-   sensor/actuator node with ID=2.
-8. The user of the second control-panel node presses on the button "turn off all actuators".
+Server starts. It opens a socket for listening on port 1313. Control panel start and attempts to connect to server.
+Connection between server and control panel is passed to a client handler on a new thread. Control panel
+immediately shares its unique id with server. Server stores the id along with the clientHandler handling the panel
+
+SensorActuatorNode attempts to connect to server. Connection between server and SensorActuatorNode 
+is passed to another client handler on a new thread. The node immediately shares its unique id with server. 
+Server stores the id along with the clientHandler. 
+
+SensorActuatorNode attempts to connect with control panel. 
+The node sends a command which the message processor process. If a connection can be made the client handler
+will update a Hashmap containing all client relationships, which all handlers have access to.
 
 ## Reliability and security
 
-TODO - describe the reliability and security mechanisms your solution supports.
+It doesn't do everything a user may expect it to do.
+System is reliable when ran in the correct sequence. 
+If something goes wrong there are few attempts of resolving the issues withing the program.
