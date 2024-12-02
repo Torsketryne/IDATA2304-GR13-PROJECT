@@ -7,8 +7,14 @@ import java.util.Map;
 import idata2304.group13.listeners.greenhouse.NodeStateListener;
 import idata2304.group13.tools.Logger;
 
+// Note: javadoc documentation was enhanced with the assistance of ChatGPT and Github Copilot for clarity and completeness.
+
 /**
  * Application entrypoint - a simulator for a greenhouse.
+ * <p>
+ *     This class is responsible for simulating a greenhouse with multiple sensor and actuator nodes.
+ *     It can start and stop the simulation, and notify listeners about the state of the nodes.
+ *     </p>
  */
 public class GreenhouseSimulator {
   private final Map<Integer, SensorActuatorNode> nodes = new HashMap<>();
@@ -30,6 +36,10 @@ public class GreenhouseSimulator {
 
   /**
    * Initialise the greenhouse but don't start the simulation just yet.
+   * <p>
+   * This methods have examples of creating nodes with different parameters.
+   * temperature, humidity, windows, fans, heaters
+   * </p>
    */
   public void initialize() {
     createNode(1, 2, 1, 0, 0);
@@ -37,6 +47,16 @@ public class GreenhouseSimulator {
     createNode(2, 0, 0, 0, 0);
     Logger.info("Greenhouse initialized");
   }
+
+  /**
+   * This methdos creates a new sensor/actuator node based on numbers of sensors and actuators.
+   *
+   * @param temperature The number of temperature sensors.
+   * @param humidity    The number of humidity sensors.
+   * @param windows     The number of windows.
+   * @param fans        The number of fans.
+   * @param heaters     The number of heaters.
+   */
 
   private void createNode(int temperature, int humidity, int windows, int fans, int heaters) {
     SensorActuatorNode node = DeviceFactory.createNode(
@@ -53,6 +73,9 @@ public class GreenhouseSimulator {
 
   /**
    * Start a simulation of a greenhouse - all the sensor and actuator nodes inside it.
+   * <p>
+   * This method will initialize the communication and start all the nodes. and periodic switches.
+   * </p>
    */
   public void start() {
     initiateCommunication();
@@ -66,6 +89,10 @@ public class GreenhouseSimulator {
     Logger.info("Simulator started");
   }
 
+  /**
+   * This method will initiate the communication with the greenhouse nodes.if fake will start fake periodic switches.
+   * if real will start the real communication.
+   */
   private void initiateCommunication() {
     if (fake) {
       initiateFakePeriodicSwitches();
@@ -87,6 +114,9 @@ public class GreenhouseSimulator {
     System.out.println("Nodes size: " + nodes.size());
   }
 
+  /**
+   *  Create fake periodic switches for the greenhouse nodes.
+   */
   private void initiateFakePeriodicSwitches() {
     periodicSwitches.add(new PeriodicSwitch("Window DJ", nodes.get(1), 2, 20000));
     periodicSwitches.add(new PeriodicSwitch("Heater DJ", nodes.get(2), 7, 8000));
@@ -103,6 +133,9 @@ public class GreenhouseSimulator {
     Logger.info("Simulator stopped");
   }
 
+  /**
+   * Stop the communication with the greenhouse nodes.
+   */
   private void stopCommunication() {
     if (fake) {
       for (PeriodicSwitch periodicSwitch : periodicSwitches) {

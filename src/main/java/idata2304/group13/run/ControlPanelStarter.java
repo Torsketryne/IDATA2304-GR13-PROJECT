@@ -6,6 +6,10 @@ import idata2304.group13.controlpanel.FakeCommunicationChannel;
 import idata2304.group13.controlpanel.SocketCommunicationChannel;
 import idata2304.group13.gui.controlpanel.ControlPanelApplication;
 import idata2304.group13.tools.Logger;
+import java.net.ServerSocket;
+
+// Note: javadoc documentation was enhanced with the assistance of ChatGPT and Github Copilot for clarity and completeness.
+
 
 /**
  * Starter class for the control panel.
@@ -39,7 +43,14 @@ public class ControlPanelStarter {
     starter.start();
   }
 
-  public void start() {
+
+  /**
+   * Starts the control panel application by initializing the communication channel and the logic.and then starting the
+   * application. and then stopping the communication.
+   *
+   * @see ControlPanelApplication
+   */
+  private void start() {
     ControlPanelLogic logic = new ControlPanelLogic();
     CommunicationChannel channel = initiateCommunication(logic, fake);
     ControlPanelApplication.startApp(logic, channel);
@@ -48,6 +59,12 @@ public class ControlPanelStarter {
     stopCommunication();
   }
 
+  /**
+   * Initializes the communication channel based on the given logic and fake mode.
+   * @param logic The control panel logic
+   * @param fake Whether to use fake communication
+   * @return The communication channel
+   */
   private CommunicationChannel initiateCommunication(ControlPanelLogic logic, boolean fake) {
     CommunicationChannel channel;
     if (fake) {
@@ -58,6 +75,11 @@ public class ControlPanelStarter {
     return channel;
   }
 
+  /**
+   * Initiates the socket communication.
+   * @param logic The control panel logic
+   * @return The communication channel
+   */
   private CommunicationChannel initiateSocketCommunication(ControlPanelLogic logic) {
     SocketCommunicationChannel channel = new SocketCommunicationChannel(logic, count);
     count++;
