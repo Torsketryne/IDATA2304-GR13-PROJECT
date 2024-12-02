@@ -20,11 +20,13 @@ public class ClientHandler implements Runnable{
   private ProcessMessage processMessage;
   private NodeControlPanelRelations relationships;
   private HashMap<String, String> commandBuffer;
-  private int clientId;
+  private String clientId;
 
   public ClientHandler(Server server, Socket socket, NodeControlPanelRelations relationships, MessageHandler messageHandler) {
     this.server = server;
     initializeStreams(socket);
+    this.clientId = readClientMessage();
+    this.server.addClients(clientId, this);
     this.socket = socket;
     this.relationships = relationships;
     this.messageHandler = messageHandler;
