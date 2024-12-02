@@ -7,6 +7,8 @@ public class Sensor {
   private final SensorReading reading;
   private final double min;
   private final double max;
+  private static int nextId = 1;
+  private final int id;
 
   /**
    * Create a sensor.
@@ -22,6 +24,17 @@ public class Sensor {
     this.min = min;
     this.max = max;
     ensureValueBoundsAndPrecision(current);
+    this.id = generateUniqueId();
+  }
+
+  /**
+   * Get the ID of the actuator.
+   *
+   * @return An ID which is guaranteed to be unique at a node level, not necessarily unique at
+   *     the whole greenhouse-network level.
+   */
+  public int getId() {
+    return id;
   }
 
   public String getType() {
@@ -110,5 +123,14 @@ public class Sensor {
   @Override
   public String toString() {
     return reading.toString();
+  }
+
+  /**
+   * Method that generates a unique ID for each actuator.
+   *
+   * @return A unique ID for each actuator
+   */
+  private static int generateUniqueId() {
+    return nextId++;
   }
 }

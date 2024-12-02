@@ -2,6 +2,8 @@ package idata2304.group13.greenhouse;
 import idata2304.group13.tools.Logger;
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -24,15 +26,18 @@ public class GreenhouseClient {
     private BufferedReader in;
     private PrintWriter out;
     private String nodeId;
+    private final SensorActuatorNode node;
 
     /**
      * Create a new client for the greenhouse system.
      */
-    public GreenhouseClient() {
+    public GreenhouseClient(SensorActuatorNode node) {
         this.nodeId = "n" + new Random().nextInt(999);
+        this.node = node;
     }
-    public GreenhouseClient(int customId) {
+    public GreenhouseClient(int customId, SensorActuatorNode node) {
         this.nodeId = "n" + customId;
+        this.node = node;
     }
 
     public void run() {
@@ -56,9 +61,39 @@ public class GreenhouseClient {
             out.println(nodeId);
             Logger.info("Connected to server at " + HOST + ":" + PORT);
             connectToPanel(panelId);
+            sendSensorActuatorInfo();
         } catch (IOException e) {
             Logger.error("Error while running client: " + e.getMessage());
         }
+    }
+
+    public void sendSensorActuatorInfo() {
+        for (String command : turnListOfActuatorsIntoListOfCommands()) {
+            String messageType = "MessageType:NodeChange";
+            out.println(messageType + command);
+        }
+        for (String command : turnListOfSensorsIntoListOfCommands()) {
+            String messageType = "MessageType:NodeChange";
+            out.println(messageType + command);
+        }
+    }
+
+    public List<String> turnListOfActuatorsIntoListOfCommands() {
+        ArrayList<String> listOfCommands = new ArrayList<>();
+        for (Actuator actuator : node.getActuators()) {
+            String command = ";NodeId:" + actuator.getNodeId() + "Attachment:Actuator;Id:" + actuator.getId() + ";Type:" + actuator.getType() + ";State:" + actuator.isOn();
+            listOfCommands.add(command);
+        }
+        return listOfCommands;
+    }
+
+    public List<String> turnListOfSensorsIntoListOfCommands() {
+        ArrayList<String> listOfCommands = new ArrayList<>();
+        for (Sensor sensor : node.getSensors()) {
+            String command = ";Attachment:Sensor;id:" + sensor.getId() + ";Type:" + sensor.getType() + ";Value:" + sensor.getReading().getValue() + ";Unit:" + sensor.getReading().getUnit();
+            listOfCommands.add(command);
+        }
+        return listOfCommands;
     }
 
     /**

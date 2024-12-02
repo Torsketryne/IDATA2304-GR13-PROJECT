@@ -106,7 +106,7 @@ public class GreenhouseSimulator {
    */
   private void initiateRealCommunication() {
     for(SensorActuatorNode node : nodes.values()) {
-      GreenhouseClient client = new GreenhouseClient(count);
+      GreenhouseClient client = new GreenhouseClient(count, node);
       count++;
       client.run();
       clients.add(client);
