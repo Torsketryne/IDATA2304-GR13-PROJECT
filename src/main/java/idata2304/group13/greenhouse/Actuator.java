@@ -5,9 +5,13 @@ import java.util.Map;
 import idata2304.group13.listeners.common.ActuatorListener;
 
 /**
+ * Represents an actuator in the greenhouse network.
  * An actuator that can change the environment in a way. The actuator will make impact on the
  * sensors attached to this same node.
  */
+
+// Note: javadoc documentation was enhanced with the assistance of ChatGPT and Github Copilot for clarity and completeness.
+
 public class Actuator {
   private static int nextId = 1;
   private final String type;
@@ -22,7 +26,7 @@ public class Actuator {
   /**
    * Create an actuator. An ID will be auto-generated.
    *
-   * @param type   The type of the actuator.
+   * @param type   The type of the actuator ("heater", "fan").
    * @param nodeId ID of the node to which this actuator is connected.
    */
   public Actuator(String type, int nodeId) {
@@ -33,7 +37,7 @@ public class Actuator {
   }
 
   /**
-   * Create an actuator.
+   * Create an actuator with a specified ID.
    *
    * @param id     The desired ID of the node.
    * @param type   The type of the actuator.
@@ -46,6 +50,11 @@ public class Actuator {
     this.id = id;
   }
 
+  /**
+   * Method that generates a unique ID for each actuator.
+   *
+   * @return A unique ID for each actuator
+   */
   private static int generateUniqueId() {
     return nextId++;
   }
@@ -73,6 +82,11 @@ public class Actuator {
     impacts.put(sensorType, diffWhenActive);
   }
 
+  /**
+   * Gets the type of the actuator.
+   *
+   * @return The type of the actuator.
+   */
   public String getType() {
     return type;
   }
@@ -98,6 +112,9 @@ public class Actuator {
     notifyChanges();
   }
 
+  /**
+   * The listener will be notified about the changes in the actuator state.
+   */
   private void notifyChanges() {
     if (listener != null) {
       listener.actuatorUpdated(this.nodeId, this);
@@ -129,6 +146,11 @@ public class Actuator {
     }
   }
 
+  /**
+   * Returns a string representation of the actuators current state.
+   *
+   * @return A string will talk about the type of actuator and whether it is on or off.
+   */
   @Override
   public String toString() {
     return "Actuator{"
@@ -165,8 +187,12 @@ public class Actuator {
    */
   public int getId() {
     return id;
+    /**
+     * Gets the ID of the of the node, when an actuator is connected to.
+     *
+     * @return The ID will be returned.
+     */
   }
-
   public int getNodeId() {
     return nodeId;
   }

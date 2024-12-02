@@ -7,6 +7,8 @@ import idata2304.group13.controlpanel.SocketCommunicationChannel;
 import idata2304.group13.gui.controlpanel.ControlPanelApplication;
 import idata2304.group13.tools.Logger;
 
+import java.net.ServerSocket;
+
 /**
  * Starter class for the control panel.
  * Note: we could launch the Application class directly, but then we would have issues with the
