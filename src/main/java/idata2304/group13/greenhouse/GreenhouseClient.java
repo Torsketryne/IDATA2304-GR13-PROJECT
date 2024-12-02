@@ -40,6 +40,7 @@ public class GreenhouseClient {
             clientSocket = new Socket(HOST, PORT);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             out = new PrintWriter(clientSocket.getOutputStream(), true);
+            out.println(nodeId);
             Logger.info("Connected to server at " + HOST + ":" + PORT);
             connectToPanel("c0");
         } catch (IOException e) {
@@ -52,6 +53,7 @@ public class GreenhouseClient {
             clientSocket = new Socket(HOST, PORT);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             out = new PrintWriter(clientSocket.getOutputStream(), true);
+            out.println(nodeId);
             Logger.info("Connected to server at " + HOST + ":" + PORT);
             connectToPanel(panelId);
         } catch (IOException e) {

@@ -1,7 +1,9 @@
 package idata2304.group13.tools;
 
+import idata2304.group13.network.ClientHandler;
 import idata2304.group13.network.NodeControlPanelRelations;
 import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -9,10 +11,10 @@ import java.util.Map;
  */
 public class ProcessMessage {
 
-    private final NodeControlPanelRelations relations;
+    private final ClientHandler clientHandler;
 
-    public ProcessMessage(NodeControlPanelRelations relations) {
-        this.relations = relations;
+    public ProcessMessage(ClientHandler clientHandler) {
+        this.clientHandler = clientHandler;
     }
 
     /**
@@ -37,7 +39,7 @@ public class ProcessMessage {
 
                 break;
             case "NodeChange":
-
+                //alterNode(parsedData);
                 break;
             case "Stop":
 
@@ -52,14 +54,18 @@ public class ProcessMessage {
         String sourceId = parsedData.get("Source");
         String destId = parsedData.get("Dest");
 
-        if (sourceId == null || destId == null) {
-            Logger.error("Missing ID for source or destination");
-        } else {
-            String nodeId = sourceId.contains("n") ? sourceId : destId;
-            String panelId = sourceId.contains("c") ? sourceId : destId;
+        if (clientHandler.checkForOtherClient(destId)) {
+            if (sourceId == null || destId == null) {
+                clientHandler.writeResponseToClient("Missing one or both IDs");
+            } else {
+                String nodeId = sourceId.contains("n") ? sourceId : destId;
+                String panelId = sourceId.contains("c") ? sourceId : destId;
 
-            this.relations.addRelation(nodeId, panelId);
-            Logger.info("SensorNode " + nodeId + " is now connected with control panel " + panelId);
+                clientHandler.createRelationship(nodeId, panelId);
+                clientHandler.writeResponseToClient("You have successfully connected to: " + destId);
+            }
+        } else {
+            clientHandler.writeResponseToClient("Could not find any nodes with given ID");
         }
     }
 }
