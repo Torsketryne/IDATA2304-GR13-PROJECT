@@ -28,7 +28,7 @@ public class ImageProcessing {
         public static String imageToByteArray(String imageName) {
             try {
                 String dirName = "images/";
-                BufferedImage image = ImageIO.read(new File(dirName + imageName + ".jpg"));
+                BufferedImage image = ImageIO.read(new File(dirName + imageName + ".jpeg"));
 
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 ImageIO.write(image, "jpg", baos);
@@ -57,7 +57,7 @@ public class ImageProcessing {
             bais.close();
 
             String dirName = "images/";
-            ImageIO.write(image, "jpg", new File(dirName + imageName + "1.jpg"));
+            ImageIO.write(image, "jpg", new File(dirName + imageName + ".jpg"));
         } catch (IOException e) {
             System.out.println("Error converting byte array to image: " + e.getMessage());
         }
