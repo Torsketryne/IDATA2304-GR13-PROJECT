@@ -1,31 +1,68 @@
 # Project
 
-Course project for the
-course [IDATA2304 Computer communication and network programming (2023)](https://www.ntnu.edu/studies/courses/IDATA2304/2023).
+Course project for the course [IDATA2304 Computer Communication and Network Programming (2023)](https://www.ntnu.edu/studies/courses/IDATA2304/2023).
 
-Project theme: a distributed smart greenhouse application, consisting of:
+## Overview
 
-* Sensor-actuator nodes
-* Visualization nodes
+This project implements a distributed smart greenhouse application, consisting of:
 
-See protocol description in [protocol.md](protocol.md).
+- **Sensor-Actuator Nodes**
+- **Visualization Nodes**
 
-## Getting started
+For a detailed description of the communication protocol, refer to [protocol.md](protocol.md).
 
-There are several runnable classes in the project.
+---
 
-To run the greenhouse part (with sensor/actuator nodes):
+## Getting Started
 
-* Command line version: run the `main` method inside `CommandLineGreenhouse` class.
-* GUI version: run the `main` method inside `GreenhouseGuiStarter` class. Note - if you run the
-  `GreenhouseApplication` class directly, JavaFX will complain that it can't find necessary modules.
+### Run Order
 
-To run the control panel (only GUI-version is available): run the `main` method inside the
-`ControlPanelStarter` class
-To run the control panel in fake mode, make sure the variable 'fake' in the main method equals true.
+To ensure proper functionality, run the files in the following order:
 
-## Simulating events
+1. **Server** 
+    ```bash
+    java Server
+    ```
+3. **ControlPanelStarter**
+    ```bash
+    java ControlPanelStarter
+    ```
+3. **GreenhouseSimulator**
+    ```bash
+   java GreenhouseSimulator
+    ```
 
-If you want to simulate fake communication (just some periodic events happening), you can run
-both the greenhouse and control panel parts with a command line parameter `fake`. Check out
-classes in the [`no.ntnu.run` package](src/main/java/no/ntnu/run) for more details. 
+---
+
+### Running the Greenhouse
+
+There are two versions of the greenhouse application:
+
+1. **Command-Line Interface (CLI):**  
+   Execute the `main` method in the `CommandLineGreenhouse` class.
+
+2. **Graphical User Interface (GUI):**  
+   Execute the `main` method in the `GreenhouseGuiStarter` class.  
+   **Note:** Do not run the `GreenhouseApplication` class directly, as JavaFX requires additional modules that may not load properly.
+
+---
+
+### Running the Control Panel
+
+The control panel is only available as a GUI version:
+
+- Execute the `main` method in the `ControlPanelStarter` class.
+- To simulate control panel operations in "fake" mode, set the `fake` variable in the main method to `true`.
+
+---
+
+## Simulating Events
+
+To simulate periodic events for testing purposes:
+
+1. Run both the greenhouse and the control panel with the `fake` command-line parameter.
+2. For additional details, refer to the classes in the [`no.ntnu.run` package](src/main/java/no/ntnu/run).
+
+
+To add run instructions for the three classes (`Server`, `ControlPanelStarter`, and `GreenhouseSimulator`) to the `README.md` file, you can update the **Getting Started** section like this:
+
