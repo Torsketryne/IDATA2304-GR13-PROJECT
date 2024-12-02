@@ -13,6 +13,8 @@ import idata2304.group13.tools.Logger;
  * based on the command line arguments. the fake mode simulates the events, while the real mode communicates with the
  * server.
  * </p>
+ *
+ * @author Girst
  */
 public class GreenhouseGuiStarter {
   /**

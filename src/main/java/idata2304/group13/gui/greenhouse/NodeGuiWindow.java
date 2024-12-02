@@ -18,6 +18,8 @@ import idata2304.group13.listeners.greenhouse.SensorListener;
  *
  * This class display the information about sensors and actuator and allows interaction
  * with them through graphical interface.
+ *
+ * @author Girst
  */
 public class NodeGuiWindow extends Stage implements SensorListener, ActuatorListener {
   private static final double VERTICAL_OFFSET = 50;

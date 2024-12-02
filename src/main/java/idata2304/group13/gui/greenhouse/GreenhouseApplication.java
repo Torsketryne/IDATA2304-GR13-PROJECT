@@ -14,6 +14,8 @@ import idata2304.group13.tools.Logger;
  * Run a greenhouse simulation with a graphical user interface (GUI), with JavaFX.
  *
  * Create a user interface for monitoring and controlling a greenhouse simulation.
+ *
+ * @author Girst
  */
 public class GreenhouseApplication extends Application implements NodeStateListener {
   private static GreenhouseSimulator simulator;

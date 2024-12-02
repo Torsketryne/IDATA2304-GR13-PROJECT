@@ -2,6 +2,8 @@ package idata2304.group13.tools;
 
 /**
  * A helper class for parsing strings.
+ *
+ * @author Girst
  */
 public class Parser {
   /**

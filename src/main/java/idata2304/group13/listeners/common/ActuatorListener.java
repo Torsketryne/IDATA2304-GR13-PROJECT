@@ -6,6 +6,8 @@ import idata2304.group13.greenhouse.Actuator;
  * Listener for actuator state changes.
  * This could be used both on the sensor/actuator (greenhouse) side, as wall as
  * on the control panel side.
+ *
+ * @author Girst
  */
 public interface ActuatorListener {
   /**

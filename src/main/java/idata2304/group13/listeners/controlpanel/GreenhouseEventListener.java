@@ -11,6 +11,8 @@ import idata2304.group13.greenhouse.SensorReading;
  * control-panel side, not the greenhouse side.
  * The idea is that a control panel can get events when some new information is received
  * about some changes in a greenhouse.
+ *
+ * @author Girst
  */
 public interface GreenhouseEventListener {
   /**

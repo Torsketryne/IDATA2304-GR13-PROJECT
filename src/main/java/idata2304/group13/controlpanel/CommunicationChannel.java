@@ -4,6 +4,8 @@ package idata2304.group13.controlpanel;
  * A communication channel for disseminating control commands to the sensor nodes
  * (sending commands to the server) and receiving notifications about events.
  * Your socket class on the control panel side should implement this.
+ *
+ * @author Girst
  */
 public interface CommunicationChannel {
   /**

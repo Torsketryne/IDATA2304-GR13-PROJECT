@@ -18,6 +18,8 @@ import idata2304.group13.greenhouse.ActuatorCollection;
 /**
  * A section of the GUI representing a list of actuators. Can be used both on the sensor/actuator
  * node, and on a control panel node.
+ *
+ * @author Girst
  */
 public class ActuatorPane extends TitledPane {
   private final Map<Actuator, SimpleStringProperty> actuatorValue = new HashMap<>();

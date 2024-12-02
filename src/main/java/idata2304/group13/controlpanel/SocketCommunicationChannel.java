@@ -17,6 +17,8 @@ import java.util.TimerTask;
  * A real communication channel. Emulates the node discovery (over the Internet).
  * In practice - spawn some events at specified time (specified delay).
  * Note: this class is used only for debugging, you can remove it in your final project!
+ *
+ * @author Torsketryne, ChatGPT 4o mini, Girst
  */
 public class SocketCommunicationChannel extends Thread implements CommunicationChannel{
 
@@ -33,6 +35,7 @@ public class SocketCommunicationChannel extends Thread implements CommunicationC
    * Create a new real communication channel.
    *
    * @param logic The application logic of the control panel node.
+   * @author Torsketryne
    */
   public SocketCommunicationChannel(ControlPanelLogic logic) {
     this.logic = logic;
@@ -41,11 +44,22 @@ public class SocketCommunicationChannel extends Thread implements CommunicationC
     socketWriter.println(panelId);
   }
 
+  /**
+   * Create a new real communication channel.
+   *
+   * @param logic The application logic of the control panel node.
+   * @author Torsketryne
+   */
   public SocketCommunicationChannel(ControlPanelLogic logic, int customId) {
     this.logic = logic;
     this.panelId = "c" + customId;
   }
 
+  /**
+   *
+   * @param socket A connected socket
+   * @author Girst
+   */
   private void initializeStreams(Socket socket) {
     try {
       socketReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -55,6 +69,9 @@ public class SocketCommunicationChannel extends Thread implements CommunicationC
     }
   }
 
+  /**
+   * @author ChatGPT 4o mini
+   */
   private void startListening() {
     listeningThread = new Thread(() -> {
       try {
@@ -72,17 +89,9 @@ public class SocketCommunicationChannel extends Thread implements CommunicationC
     listeningThread.start();
   }
 
-  public void nodeChange(ActuatorInfo actuatorInfo, SensorInfo sensorInfo) {
-    Timer timer = new Timer();
-    timer.schedule(new TimerTask() {
-      @Override
-      public void run() {
-        System.out.println("Spawning node " + specification);
-        logic.onNodeAdded(nodeInfo);
-      }
-    }, delay * 1000L);
-  }
-
+  /**
+   * @author ChatGPT 4o mini
+   */
   private void close() {
     try {
       if (socket != null && !socket.isClosed()) {
@@ -93,6 +102,11 @@ public class SocketCommunicationChannel extends Thread implements CommunicationC
     }
   }
 
+  /**
+   *
+   * @return Returns true if method was successful in opening a socket
+   * @author Torsketryne
+   */
   @Override
   public boolean open() {
     boolean opened = true;

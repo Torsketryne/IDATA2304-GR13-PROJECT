@@ -12,6 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * This server listen for incoming client connection on a specific port, accept connection and
  * assign each client to seperate thread for handling communication.
+ *
+ * @author Torsketryne
  */
 public class Server {
 

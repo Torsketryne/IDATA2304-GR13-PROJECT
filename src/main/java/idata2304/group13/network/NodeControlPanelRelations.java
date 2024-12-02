@@ -7,7 +7,9 @@ import java.util.List;
 /**
  * This class manage the relationship between nodes and control panels in a network.
  *
- * this class allows to add, remove and retirve relationships nodes and control panels.
+ * this class allows to add, remove and retrieve relationships nodes and control panels.
+ *
+ * @author Torsketryne
  */
 public class NodeControlPanelRelations {
 

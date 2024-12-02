@@ -5,6 +5,8 @@ import java.util.Map;
 
 /**
  * Handle messages.
+ *
+ * @author MoldyDaniel
  */
 public class MessageHandler {
 

@@ -4,6 +4,8 @@ import javafx.scene.layout.Region;
 
 /**
  * Common GUI tools.
+ *
+ * @author Girst
  */
 public class GuiTools {
   private static final double HUGE_HEIGHT = 5000;

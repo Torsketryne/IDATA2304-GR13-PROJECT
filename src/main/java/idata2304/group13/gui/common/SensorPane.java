@@ -14,6 +14,8 @@ import idata2304.group13.tools.Logger;
 
 /**
  * A section of GUI displaying sensor data.
+ *
+ * @author Girst
  */
 public class SensorPane extends TitledPane {
   private final List<SimpleStringProperty> sensorProps = new ArrayList<>();

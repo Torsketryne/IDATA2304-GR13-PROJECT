@@ -6,6 +6,8 @@ import idata2304.group13.greenhouse.SensorActuatorNode;
  * Listener which receives node lifecycle events.
  * This should be used on the sensor/actuator node part, where the real node object is available.
  * This event will (probably) not be useful on the control panel side.
+ *
+ * @author Girst
  */
 public interface NodeStateListener {
   /**

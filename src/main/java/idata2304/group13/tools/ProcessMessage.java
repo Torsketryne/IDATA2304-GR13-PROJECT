@@ -15,6 +15,8 @@ import java.util.Set;
 
 /**
  * Process a message from a map of key-value pairs.
+ *
+ * @author MoldyDaniel, Torsketryne
  */
 public class ProcessMessage {
 
@@ -22,9 +24,19 @@ public class ProcessMessage {
     private SocketCommunicationChannel socketCommunicationChannel;
     private int count;
 
+    /**
+     *
+     * @param clientHandler reference to client to run handling functions
+     * @author Torsketryne
+     */
     public ProcessMessage(ClientHandler clientHandler) {
         this.clientHandler = clientHandler;
     }
+    /**
+     *
+     * @param socketCommunicationChannel reference to channel to run ControlPanel functions
+     * @author Torsketryne
+     */
     public ProcessMessage(SocketCommunicationChannel socketCommunicationChannel) {
         this.socketCommunicationChannel = socketCommunicationChannel;
     }
@@ -33,6 +45,7 @@ public class ProcessMessage {
      * Process a message from a map of key-value pairs.
      *
      * @param parsedData The message to process
+     * @author MoldyDaniel, Torsketryne
      */
     public void ProcessMessage(Map<String,String> parsedData) {
         String MessageType = parsedData.get("MessageType");
@@ -64,6 +77,11 @@ public class ProcessMessage {
 
     }
 
+    /**
+     *
+     * @param parsedData meta data and data
+     * @author MoldyDaniel, Torsketryne
+     */
     private void alterNode(Map<String, String> parsedData) {
         String nodeType = parsedData.get("NodeType");
         //String state = parsedData.get("State");
@@ -83,6 +101,11 @@ public class ProcessMessage {
         }
     }
 
+    /**
+     *
+     * @param parsedData meta data and data
+     * @author Torsketryne
+     */
     private void makeConnection(Map<String,String> parsedData) {
         String sourceId = parsedData.get("Source");
         String destId = parsedData.get("Dest");
@@ -102,6 +125,11 @@ public class ProcessMessage {
         }
     }
 
+    /**
+     *
+     * @param message generic text message to be printed to console
+     * @author Torsketryne
+     */
     private void printMessage(String message) {
         System.out.println(message);
     }

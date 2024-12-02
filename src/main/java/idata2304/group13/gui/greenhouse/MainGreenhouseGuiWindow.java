@@ -16,6 +16,8 @@ import javafx.scene.text.Font;
 
 /**
  * The main GUI window for greenhouse simulator.
+ *
+ * @author Girst
  */
 public class MainGreenhouseGuiWindow extends Scene {
   public static final int WIDTH = 300;

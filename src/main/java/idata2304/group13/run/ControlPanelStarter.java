@@ -15,6 +15,8 @@ import java.net.ServerSocket;
  * Starter class for the control panel.
  * Note: we could launch the Application class directly, but then we would have issues with the
  * debugger (JavaFX modules not found)
+ *
+ * @author Girst, Torsketryne
  */
 public class ControlPanelStarter {
   private final boolean fake;
@@ -32,6 +34,8 @@ public class ControlPanelStarter {
    *             use real socket communication. Go to Run → Edit Configurations.
    *             Add "fake" to the Program Arguments field.
    *             Apply the changes.
+   *
+   * @author Girst
    */
   public static void main(String[] args) {
     boolean fake = false;// make it true to test in fake mode
@@ -49,6 +53,7 @@ public class ControlPanelStarter {
    * application. and then stopping the communication.
    *
    * @see ControlPanelApplication
+   * @author Girst
    */
   private void start() {
     ControlPanelLogic logic = new ControlPanelLogic();
@@ -64,6 +69,7 @@ public class ControlPanelStarter {
    * @param logic The control panel logic
    * @param fake Whether to use fake communication
    * @return The communication channel
+   * @author Girst
    */
   private CommunicationChannel initiateCommunication(ControlPanelLogic logic, boolean fake) {
     CommunicationChannel channel;
@@ -79,6 +85,7 @@ public class ControlPanelStarter {
    * Initiates the socket communication.
    * @param logic The control panel logic
    * @return The communication channel
+   * @author Torsketryne
    */
   private CommunicationChannel initiateSocketCommunication(ControlPanelLogic logic) {
     SocketCommunicationChannel channel = new SocketCommunicationChannel(logic, count);
@@ -86,6 +93,12 @@ public class ControlPanelStarter {
     return channel;
   }
 
+  /**
+   *
+   * @param logic The control panel logic
+   * @return The communication channel
+   * @author Girst
+   */
   private CommunicationChannel initiateFakeSpawner(ControlPanelLogic logic) {
     // Here we pretend that some events will be received with a given delay
     FakeCommunicationChannel spawner = new FakeCommunicationChannel(logic);
@@ -114,6 +127,9 @@ public class ControlPanelStarter {
     return spawner;
   }
 
+  /**
+   * @author Girst
+   */
   private void stopCommunication() {
     // TODO - here you stop the TCP/UDP socket communication
   }

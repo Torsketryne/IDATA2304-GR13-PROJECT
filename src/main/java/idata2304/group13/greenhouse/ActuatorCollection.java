@@ -7,6 +7,8 @@ import idata2304.group13.tools.Logger;
 
 /**
  * A collection of actuators of different types.
+ *
+ * @author Girst
  */
 public class ActuatorCollection implements Iterable<Actuator> {
   private final Map<Integer, Actuator> actuators = new HashMap<>();

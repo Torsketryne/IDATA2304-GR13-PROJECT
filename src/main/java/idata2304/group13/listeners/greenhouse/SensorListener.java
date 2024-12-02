@@ -8,6 +8,8 @@ import idata2304.group13.greenhouse.Sensor;
  * This will (probably) be usable only on the sensor/actuator node (greenhouse) side, where the
  * real sensor objects are available. The control panel side has only sensor reading values
  * available, not the sensors themselves.
+ *
+ * @author Girst
  */
 public interface SensorListener {
   /**

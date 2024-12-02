@@ -8,6 +8,8 @@ import idata2304.group13.listeners.common.ActuatorListener;
  * Represents an actuator in the greenhouse network.
  * An actuator that can change the environment in a way. The actuator will make impact on the
  * sensors attached to this same node.
+ *
+ * @author Girst
  */
 
 // Note: javadoc documentation was enhanced with the assistance of ChatGPT and Github Copilot for clarity and completeness.

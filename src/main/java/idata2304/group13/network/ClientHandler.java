@@ -11,6 +11,9 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
+/**
+ * @author Torsketrynet
+ */
 public class ClientHandler implements Runnable{
 
   private Server server;

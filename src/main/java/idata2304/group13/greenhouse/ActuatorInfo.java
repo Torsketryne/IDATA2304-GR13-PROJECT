@@ -1,5 +1,8 @@
 package idata2304.group13.greenhouse;
 
+/**
+ * @author Torsketryne
+ */
 public class ActuatorInfo {
 
   private int id;

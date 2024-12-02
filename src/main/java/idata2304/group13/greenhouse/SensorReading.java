@@ -4,6 +4,8 @@ import java.util.Objects;
 
 /**
  * Represents one sensor reading (value).
+ *
+ * @author Girst
  */
 public class SensorReading {
   private final String type;

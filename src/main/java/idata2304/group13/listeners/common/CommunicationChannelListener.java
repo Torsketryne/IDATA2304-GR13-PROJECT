@@ -3,6 +3,8 @@ package idata2304.group13.listeners.common;
 /**
  * A listener who will get notified about events happening on the communication channel.
  * The channel can be a TCP socket, or other type of channel.
+ *
+ * @author Girst
  */
 public interface CommunicationChannelListener {
   /**

@@ -6,6 +6,8 @@ import idata2304.group13.greenhouse.ActuatorCollection;
 /**
  * Contains information about one sensor/actuator node. This is NOT the node itself, rather
  * an information that can be used on the control-panel side to represent the node.
+ *
+ * @author Girst
  */
 public class SensorActuatorNodeInfo {
 

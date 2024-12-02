@@ -9,6 +9,8 @@ package idata2304.group13.greenhouse;
  *
  * <p> The factory handles the creation of unique IDs for the nodes.
  * configuration for common greenhouse devices like temperature sensors, humidity sensors, windows, fans, and heaters.
+ *
+ * @author Girst
  */
 public class DeviceFactory {
   private static final double NORMAL_GREENHOUSE_TEMPERATURE = 27;

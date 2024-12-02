@@ -18,6 +18,8 @@ import idata2304.group13.tools.Logger;
  * in a database, doing some checks, sending emails, notifications, etc. Such things should never
  * be placed inside a GUI class (JavaFX classes). Therefore, we use proper structure here, even
  * though you may have no real control-panel logic in your projects.
+ *
+ * @author Girst
  */
 public class ControlPanelLogic implements GreenhouseEventListener, ActuatorListener,
     CommunicationChannelListener {

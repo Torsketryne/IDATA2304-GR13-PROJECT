@@ -14,6 +14,8 @@ import java.util.Base64;
  * I used these sources for it however it was mostly their code that I used:
  * https://stackoverflow.com/questions/3211156/how-to-convert-image-to-byte-array-in-java
  * https://www.programcreek.com/2009/02/java-convert-image-to-byte-array-convert-byte-array-to-image/
+ *
+ * @author MoldyDaniel
  */
 public class ImageProcessing {
 

@@ -13,6 +13,8 @@ import idata2304.group13.tools.Logger;
 
 /**
  * Represents one node with sensors and actuators.
+ *
+ * @author Girst
  */
 public class SensorActuatorNode implements ActuatorListener, CommunicationChannelListener {
   // How often to generate new sensor values, in seconds.

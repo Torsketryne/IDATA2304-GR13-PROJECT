@@ -2,6 +2,8 @@ package idata2304.group13.greenhouse;
 
 /**
  * A sensor which can sense the environment in a specific way.
+ *
+ * @author Girst, Torsketryne
  */
 public class Sensor {
   private final SensorReading reading;
@@ -18,6 +20,8 @@ public class Sensor {
    * @param max     Maximum allowed value
    * @param current The current (starting) value of the sensor
    * @param unit    The measurement unit. Examples: "%", "C", "lux"
+   *
+   * @author Girst, Torsketryne
    */
   public Sensor(String type, double min, double max, double current, String unit) {
     this.reading = new SensorReading(type, current, unit);
@@ -28,15 +32,20 @@ public class Sensor {
   }
 
   /**
-   * Get the ID of the actuator.
+   * Get the ID of the sensor.
    *
-   * @return An ID which is guaranteed to be unique at a node level, not necessarily unique at
-   *     the whole greenhouse-network level.
+   * @return sensor id
+   * @author Torsketryne
    */
   public int getId() {
     return id;
   }
 
+  /**
+   *
+   * @return the type of sensor
+   * @author Girst
+   */
   public String getType() {
     return reading.getType();
   }
@@ -45,6 +54,7 @@ public class Sensor {
    * Get the current sensor reading.
    *
    * @return The current sensor reading (value)
+   * @author Girst
    */
   public SensorReading getReading() {
     return reading;
@@ -54,6 +64,7 @@ public class Sensor {
    * Create a clone of this sensor.
    *
    * @return A clone of this sensor, where all the fields are the same
+   * @author Girst
    */
   public Sensor createClone() {
     return new Sensor(this.reading.getType(), this.min, this.max,
@@ -62,6 +73,7 @@ public class Sensor {
 
   /**
    * Add a random noise to the sensors to simulate realistic values.
+   * @author Girst
    */
   public void addRandomNoise() {
     double newValue = this.reading.getValue() + generateRealisticNoise();
@@ -72,6 +84,7 @@ public class Sensor {
    * Ensure the new value is within the allowed bounds and has the correct precision.
    *
    * @param newValue The new value to be checked and adjusted if necessary
+   * @author Girst
    */
   private void ensureValueBoundsAndPrecision(double newValue) {
     newValue = roundToTwoDecimals(newValue);
@@ -88,6 +101,7 @@ public class Sensor {
    *
    * @param value The value to be rounded
    * @return The rounded value
+   * @author Girst
    */
   private double roundToTwoDecimals(double value) {
     return Math.round(value * 100.0) / 100.0;
@@ -97,6 +111,7 @@ public class Sensor {
    * Generate a realistic noise value to simulate sensor reading fluctuations.
    *
    * @return A noice value in the range [-1%..+1%] of the sensor's range
+   * @author Girst
    */
   private double generateRealisticNoise() {
     final double wholeRange = max - min;
@@ -109,6 +124,7 @@ public class Sensor {
    * Apply an external impact (from an actuator) to the current value of the sensor.
    *
    * @param impact The impact to apply - the delta for the value
+   *               @author Girst
    */
   public void applyImpact(double impact) {
     double newValue = this.reading.getValue() + impact;
@@ -119,6 +135,7 @@ public class Sensor {
    * Return a string representation of the sensor.
    *
    * @return A string representation of the sensor reading
+   * @author Girst
    */
   @Override
   public String toString() {
@@ -129,6 +146,7 @@ public class Sensor {
    * Method that generates a unique ID for each actuator.
    *
    * @return A unique ID for each actuator
+   * @author Torsketryne
    */
   private static int generateUniqueId() {
     return nextId++;

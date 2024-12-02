@@ -9,9 +9,9 @@ import java.util.Random;
 /**
  * A client for the greenhouse system.
  *
- * @author MoldyDaniel
+ * @author MoldyDaniel, Torsketryne
  *
- * I have used the following sources to help me with this class:
+ *  The following sources was used in the creation of this class:
  * <a href="https://www.geeksforgeeks.org/how-to-create-a-simple-tcp-client-server-connection-in-java/">Simple TCP client server connection</a>
  */
 public class GreenhouseClient {

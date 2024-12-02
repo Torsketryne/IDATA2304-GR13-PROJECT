@@ -15,6 +15,7 @@ import java.util.Base64;
  * The code is based on the example from GeeksforGeeks:
  * <href>https://www.geeksforgeeks.org/encrypt-and-decrypt-string-file-using-java/</href>
  *
+ * @author MoldyDaniel
  */
 public class Encryption {
     private SecretKey secretKey;

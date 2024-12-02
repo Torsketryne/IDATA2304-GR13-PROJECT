@@ -4,6 +4,8 @@ package idata2304.group13.tools;
  * A logger class for encapsulating all the logging. We can either reduce the number of SonarLint
  * warnings, or implement it properly. This class makes sure we sue the same logging in all
  * places of our code.
+ *
+ * @author Girst
  */
 public class Logger {
   /**

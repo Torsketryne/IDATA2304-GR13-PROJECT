@@ -25,6 +25,8 @@ import idata2304.group13.tools.Logger;
 
 /**
  * Run a control panel with a graphical user interface (GUI), with JavaFX.
+ *
+ * @author Girst
  */
 public class ControlPanelApplication extends Application implements GreenhouseEventListener,
     CommunicationChannelListener {

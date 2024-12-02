@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for the Encryption class.
+ *
+ * @author MoldyDaniel
  */
 class EncryptionTest {
     private Encryption encryption;
