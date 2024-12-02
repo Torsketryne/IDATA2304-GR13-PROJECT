@@ -40,6 +40,11 @@ public class ActuatorCollection implements Iterable<Actuator> {
     return actuators.get(id);
   }
 
+  /**
+   *Return an iterator of objects managed by the instance.
+   *
+   * @return an iterator over the objects
+   */
   @Override
   public Iterator<Actuator> iterator() {
     return actuators.values().iterator();

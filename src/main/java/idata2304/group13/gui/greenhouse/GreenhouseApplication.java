@@ -12,12 +12,21 @@ import idata2304.group13.tools.Logger;
 
 /**
  * Run a greenhouse simulation with a graphical user interface (GUI), with JavaFX.
+ *
+ * Create a user interface for monitoring and controlling a greenhouse simulation.
  */
 public class GreenhouseApplication extends Application implements NodeStateListener {
   private static GreenhouseSimulator simulator;
   private final Map<SensorActuatorNode, NodeGuiWindow> nodeWindows = new HashMap<>();
   private Stage mainStage;
 
+  /**
+   *Starts the JavaFX application.
+   *
+   * Sets up the mai, window for the app, initializes the simulator, and listens for events form the nodes.
+   *
+   * @param mainStage The primary stage window of the JavaFX application.
+   */
   @Override
   public void start(Stage mainStage) {
     this.mainStage = mainStage;
@@ -33,6 +42,11 @@ public class GreenhouseApplication extends Application implements NodeStateListe
     simulator.start();
   }
 
+  /**
+   * Closes the application when the user exits.
+   *
+   * Stops the simulator and tries tO shut down the app.
+   */
   private void closeApplication() {
     Logger.info("Closing Greenhouse application...");
     simulator.stop();
@@ -54,6 +68,11 @@ public class GreenhouseApplication extends Application implements NodeStateListe
     launch();
   }
 
+  /**
+   *Node is ready to be displayed.
+   *
+   * @param node the node which is ready now.
+   */
   @Override
   public void onNodeReady(SensorActuatorNode node) {
     Logger.info("Starting window for node " + node.getId());
@@ -62,6 +81,11 @@ public class GreenhouseApplication extends Application implements NodeStateListe
     window.show();
   }
 
+  /**
+   * Node is stopped and no longer active.
+   *
+   * @param node The node which is stopped.
+   */
   @Override
   public void onNodeStopped(SensorActuatorNode node) {
     NodeGuiWindow window = nodeWindows.remove(node);
