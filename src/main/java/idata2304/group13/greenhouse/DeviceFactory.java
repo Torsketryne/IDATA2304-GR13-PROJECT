@@ -1,7 +1,14 @@
 package idata2304.group13.greenhouse;
 
+
+// Note: javadoc documentation was enhanced with the assistance of ChatGPT and Github Copilot for clarity and completeness.
+
 /**
  * A factory for producing sensors and actuators of specific types.
+ * The factory have methods to construct sensors and actuators nodes with specific number of sensors and actuators.
+ *
+ * <p> The factory handles the creation of unique IDs for the nodes.
+ * configuration for common greenhouse devices like temperature sensors, humidity sensors, windows, fans, and heaters.
  */
 public class DeviceFactory {
   private static final double NORMAL_GREENHOUSE_TEMPERATURE = 27;
@@ -53,6 +60,13 @@ public class DeviceFactory {
     return node;
   }
 
+  /**
+   * Adds multiple actuators to a sensor/actuator node.
+   * @param node The (@link SensorActuatorNode) to which actuators will be added.
+   * @param template The template actuator to be cloned.
+   * @param n The number of actuators to add.
+   * @throws IllegalArgumentException if the template is null.
+   */
   static void addActuators(SensorActuatorNode node, Actuator template, int n) {
     if (template == null) {
       throw new IllegalArgumentException("Actuator template is missing");
