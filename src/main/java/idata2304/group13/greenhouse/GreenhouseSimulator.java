@@ -83,7 +83,6 @@ public class GreenhouseSimulator {
       count++;
       client.run();
       clients.add(client);
-      client.sendMessage("Hello Greenhouse");
     }
     System.out.println("Nodes size: " + nodes.size());
   }
