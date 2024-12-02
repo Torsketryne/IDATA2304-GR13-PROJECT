@@ -56,17 +56,16 @@ public class ProcessMessage {
 
         if (clientHandler.checkForOtherClient(destId)) {
             if (sourceId == null || destId == null) {
-                Logger.error("Missing ID for source or destination");
+                clientHandler.writeResponseToClient("Missing one or both IDs");
             } else {
                 String nodeId = sourceId.contains("n") ? sourceId : destId;
                 String panelId = sourceId.contains("c") ? sourceId : destId;
 
                 clientHandler.createRelationship(nodeId, panelId);
-                Logger.info(
-                    "SensorNode " + nodeId + " is now connected with control panel " + panelId);
+                clientHandler.writeResponseToClient("You have successfully connected to: " + destId);
             }
         } else {
-            Logger.error("Destination does not exist");
+            clientHandler.writeResponseToClient("Could not find any nodes with given ID");
         }
     }
 }

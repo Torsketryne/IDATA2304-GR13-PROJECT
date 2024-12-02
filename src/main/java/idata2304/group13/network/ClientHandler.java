@@ -52,11 +52,6 @@ public class ClientHandler implements Runnable{
       clientCommand = readClientMessage();
       processMessage.ProcessMessage(messageHandler.parseMessage(clientCommand));
 
-
-      if (!clientCommand.isEmpty()) {
-        writeResponseToClient(clientCommand);
-        System.out.println(clientCommand);
-      }
     } while(clientCommand != null);
   }
 
@@ -70,7 +65,7 @@ public class ClientHandler implements Runnable{
     return commandStraightFromClient;
   }
 
-  private void writeResponseToClient(String response) {
+  public void writeResponseToClient(String response) {
     socketWriter.println(response);
   }
 
