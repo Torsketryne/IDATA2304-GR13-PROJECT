@@ -5,19 +5,43 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * A simple server to handle client connections.
+ *
+ * This server listen for incoming client connection on a specific port, accept connection and
+ * assign each client to seperate thread for handling communication.
+ */
 public class Server {
 
   private static final int PORT = 1313;
   private ServerSocket serverSocket;
   private MessageHandler messageHandler;
 
+  /**
+   * Create a new Server instance.
+   *
+   * The server can start.
+   */
   public Server() {}
 
+  /**
+   * The main entry point for the server application.
+   *
+   * This method creates a new server instance and start it.
+   *
+   * @param args Command-line argument
+   */
   public static void main(String[] args) {
     Server server = new Server();
     server.run();
   }
 
+  /**
+   * Start the server and listens for the client connection.
+   *
+   * This method create a listening socket, waits for clients to connect,
+   * and start a new thread for each client using the class.
+   */
   public void run(){
     this.serverSocket = openListeningSocket();
     if (serverSocket != null) {
@@ -36,8 +60,11 @@ public class Server {
   }
 
   /**
+   *Opens a socket to listen for incoming client connection.
    *
-   * @return
+   * This method binds the server to specific port 1313 and starts listening for connection.
+   *
+   * @return A object for accepting client connections, if there is an error.
    * @author Girst, Torsketryne
    */
   private ServerSocket openListeningSocket(){
@@ -52,8 +79,11 @@ public class Server {
   }
 
   /**
+   *Accepts the next client that connects to the server.
    *
-   * @return
+   * This method wait for the client to connect, then return the client socket.
+   *
+   * @return A object representing the client's connection, if there is as error.
    * @author Girst, Torsketryne
    */
   private Socket acceptNextClient(){
@@ -67,6 +97,11 @@ public class Server {
     return socket;
   }
 
+  /**
+   * Stops the server.
+   *
+   * @return Always return the value of false.
+   */
   private boolean stopServer() {
     return false;
   }

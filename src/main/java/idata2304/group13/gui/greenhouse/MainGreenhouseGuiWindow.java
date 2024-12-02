@@ -21,10 +21,18 @@ public class MainGreenhouseGuiWindow extends Scene {
   public static final int WIDTH = 300;
   public static final int HEIGHT = 300;
 
+  /**
+   * Create a new instance for the main GUI window.
+   */
   public MainGreenhouseGuiWindow() {
     super(createMainContent(), WIDTH, HEIGHT);
   }
 
+  /**
+   * Create the main content of the window.
+   *
+   * @return An object containing the main content of the window.
+   */
   private static Parent createMainContent() {
     VBox container = new VBox(createInfoLabel(), createMasterImage(), createCopyrightNotice());
     container.setPadding(new Insets(20));
@@ -33,6 +41,11 @@ public class MainGreenhouseGuiWindow extends Scene {
     return container;
   }
 
+  /**
+   * Create a label with information about the app.
+   *
+   * @return the informational message.
+   */
   private static Label createInfoLabel() {
     Label l = new Label("Close this window to stop the whole simulation");
     l.setWrapText(true);
@@ -40,12 +53,22 @@ public class MainGreenhouseGuiWindow extends Scene {
     return l;
   }
 
+  /**
+   *  Create and display an image in the window.
+   *
+   * @return An error message if there is missing file.
+   */
   private static Node createCopyrightNotice() {
     Label l = new Label("Image generated with Picsart");
     l.setFont(Font.font(10));
     return l;
   }
 
+  /**
+   * Creates and display an image in the window.
+   *
+   * @return An error message if there is missing file.
+   */
   private static Node createMasterImage() {
     Node node;
     try {
