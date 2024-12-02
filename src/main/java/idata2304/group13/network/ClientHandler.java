@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 public class ClientHandler implements Runnable{
 
+  private Server server;
   private Socket socket;
   private BufferedReader socketReader;
   private PrintWriter socketWriter;
@@ -19,13 +20,16 @@ public class ClientHandler implements Runnable{
   private ProcessMessage processMessage;
   private NodeControlPanelRelations relationships;
   private HashMap<String, String> commandBuffer;
+  private int clientId;
 
-  public ClientHandler(Socket socket, NodeControlPanelRelations relationships, MessageHandler messageHandler) {
+  public ClientHandler(Server server, Socket socket, NodeControlPanelRelations relationships, MessageHandler messageHandler) {
+    this.server = server;
+    initializeStreams(socket);
     this.socket = socket;
     this.relationships = relationships;
     this.messageHandler = messageHandler;
-    this.processMessage = new ProcessMessage(relationships);
-    initializeStreams(socket);
+    this.processMessage = new ProcessMessage(this);
+
   }
 
   private void initializeStreams(Socket socket) {
@@ -66,5 +70,17 @@ public class ClientHandler implements Runnable{
 
   private void writeResponseToClient(String response) {
     socketWriter.println(response);
+  }
+
+  public void createRelationship(String nodeId, String panelId) {
+    relationships.addRelation(nodeId, panelId);
+  }
+
+  public boolean checkForOtherClient(String otherClientId) {
+    boolean found = false;
+    if (server.getClient(otherClientId) != null) {
+      found = true;
+    }
+    return found;
   }
 }

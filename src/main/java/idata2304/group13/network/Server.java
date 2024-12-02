@@ -4,12 +4,15 @@ import idata2304.group13.tools.MessageHandler;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Server {
 
   private static final int PORT = 1313;
   private ServerSocket serverSocket;
   private MessageHandler messageHandler;
+  private ConcurrentHashMap<String, ClientHandler> clients;
 
   public Server() {}
 
@@ -23,16 +26,25 @@ public class Server {
     if (serverSocket != null) {
       NodeControlPanelRelations relationships = new NodeControlPanelRelations();
       messageHandler = new MessageHandler();
+      clients = new ConcurrentHashMap<>();
       //boolean running = true;
       while (true) {
         Socket socket = acceptNextClient();
         if (socket != null) {
-          Thread handleThread = new Thread(new ClientHandler(socket, relationships, messageHandler));
+          Thread handleThread = new Thread(new ClientHandler(this, socket, relationships, messageHandler));
           handleThread.start();
         }
         //running = stopServer();
       }
     }
+  }
+
+  public void addClients(String clientId, ClientHandler client) {
+    clients.put(clientId, client);
+  }
+
+  public ClientHandler getClient(String clientId) {
+    return clients.get(clientId);
   }
 
   /**
