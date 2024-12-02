@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 public class ClientHandler implements Runnable{
 
@@ -70,7 +71,14 @@ public class ClientHandler implements Runnable{
   }
 
   public void createRelationship(String nodeId, String panelId) {
-    relationships.addRelation(nodeId, panelId);
+    String otherClientId = nodeId.equals(clientId) ? panelId : nodeId;
+    if (!checkForOtherClient(otherClientId)) {
+      throw new NoSuchElementException("Could not create a relationship. " +
+          "The targeted client does not exist");
+    } else {
+      relationships.addRelation(nodeId, panelId);
+      server.getClient(otherClientId).writeResponseToClient("wow!!!!!");
+    }
   }
 
   public boolean checkForOtherClient(String otherClientId) {
