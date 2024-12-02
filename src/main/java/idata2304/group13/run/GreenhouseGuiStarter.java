@@ -3,8 +3,16 @@ package idata2304.group13.run;
 import idata2304.group13.gui.greenhouse.GreenhouseApplication;
 import idata2304.group13.tools.Logger;
 
+// Note: javadoc documentation was enhanced with the assistance of ChatGPT and Github Copilot for clarity and completeness.
+
 /**
  * Starter for GUI version of the greenhouse simulator.
+ * <p>
+ * This class serves as the entry point for lunching the Greenhouse GUI application.
+ * It determines whether to use fake events or real socket communication.
+ * based on the command line arguments. the fake mode simulates the events, while the real mode communicates with the
+ * server.
+ * </p>
  */
 public class GreenhouseGuiStarter {
   /**
