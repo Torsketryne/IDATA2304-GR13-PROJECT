@@ -81,7 +81,7 @@ public class GreenhouseClient {
     public List<String> turnListOfActuatorsIntoListOfCommands() {
         ArrayList<String> listOfCommands = new ArrayList<>();
         for (Actuator actuator : node.getActuators()) {
-            String command = ";NodeId:" + actuator.getNodeId() + "Attachment:Actuator;Id:" + actuator.getId() + ";Type:" + actuator.getType() + ";State:" + actuator.isOn();
+            String command = ";Attachment:Actuator;NodeId:" + actuator.getNodeId() + ";Id:" + actuator.getId() + ";Type:" + actuator.getType() + ";State:" + actuator.isOn();
             listOfCommands.add(command);
         }
         return listOfCommands;
