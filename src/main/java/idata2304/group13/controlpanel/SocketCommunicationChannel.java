@@ -1,5 +1,7 @@
 package idata2304.group13.controlpanel;
 
+import idata2304.group13.tools.MessageHandler;
+import idata2304.group13.tools.ProcessMessage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,7 +14,7 @@ import java.util.Random;
  * In practice - spawn some events at specified time (specified delay).
  * Note: this class is used only for debugging, you can remove it in your final project!
  */
-public class SocketCommunicationChannel implements CommunicationChannel{
+public class SocketCommunicationChannel extends Thread implements CommunicationChannel{
 
   private final ControlPanelLogic logic;
   private static final int PORT = 1313;
@@ -21,6 +23,7 @@ public class SocketCommunicationChannel implements CommunicationChannel{
   private PrintWriter socketWriter;
   private Socket socket;
   private String panelId;
+  private Thread listeningThread;
 
   /**
    * Create a new real communication channel.
@@ -48,6 +51,34 @@ public class SocketCommunicationChannel implements CommunicationChannel{
     }
   }
 
+  private void startListening() {
+    listeningThread = new Thread(() -> {
+      try {
+        String message;
+        ProcessMessage processMessage = new ProcessMessage(this);
+        while ((message = socketReader.readLine()) != null) {
+          processMessage.ProcessMessage(new MessageHandler().parseMessage(message));
+        }
+      } catch (IOException e) {
+        System.err.println("Error reading from socket: " + e.getMessage());
+      } finally {
+        close();
+      }
+    });
+    listeningThread.start();
+  }
+
+
+  private void close() {
+    try {
+      if (socket != null && !socket.isClosed()) {
+        socket.close();
+      }
+    } catch (IOException e) {
+      System.err.println("Error closing socket: " + e.getMessage());
+    }
+  }
+
   @Override
   public boolean open() {
     boolean opened = true;
@@ -55,6 +86,7 @@ public class SocketCommunicationChannel implements CommunicationChannel{
       this.socket = new Socket(HOST, PORT);
       initializeStreams(socket);
       socketWriter.println(panelId);
+      startListening();
     } catch (IOException ioe) {
       opened = false;
       System.err.println("Failed to connect to socket: " + ioe);

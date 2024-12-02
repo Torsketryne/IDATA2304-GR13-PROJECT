@@ -77,7 +77,7 @@ public class ClientHandler implements Runnable{
           "The targeted client does not exist");
     } else {
       relationships.addRelation(nodeId, panelId);
-      server.getClient(otherClientId).writeResponseToClient("wow!!!!!");
+      server.getClient(otherClientId).writeResponseToClient("MessageType:Message;Content:wow!!!!");
     }
   }
 

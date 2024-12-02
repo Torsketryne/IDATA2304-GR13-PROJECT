@@ -1,5 +1,6 @@
 package idata2304.group13.tools;
 
+import idata2304.group13.controlpanel.SocketCommunicationChannel;
 import idata2304.group13.network.ClientHandler;
 import idata2304.group13.network.NodeControlPanelRelations;
 import java.util.Map;
@@ -11,10 +12,14 @@ import java.util.Set;
  */
 public class ProcessMessage {
 
-    private final ClientHandler clientHandler;
+    private ClientHandler clientHandler;
+    private SocketCommunicationChannel socketCommunicationChannel;
 
     public ProcessMessage(ClientHandler clientHandler) {
         this.clientHandler = clientHandler;
+    }
+    public ProcessMessage(SocketCommunicationChannel socketCommunicationChannel) {
+        this.socketCommunicationChannel = socketCommunicationChannel;
     }
 
     /**
@@ -44,6 +49,8 @@ public class ProcessMessage {
             case "Stop":
 
                 break;
+            case "Message":
+                printMessage(parsedData.get("Content"));
             default:
                 Logger.error("Unknown command: " + MessageType);
         }
@@ -67,5 +74,9 @@ public class ProcessMessage {
         } else {
             clientHandler.writeResponseToClient("Could not find any nodes with given ID");
         }
+    }
+
+    private void printMessage(String message) {
+        System.out.println(message);
     }
 }
