@@ -1,5 +1,7 @@
 package idata2304.group13.controlpanel;
 
+import idata2304.group13.greenhouse.ActuatorInfo;
+import idata2304.group13.greenhouse.SensorInfo;
 import idata2304.group13.tools.MessageHandler;
 import idata2304.group13.tools.ProcessMessage;
 import java.io.BufferedReader;
@@ -8,6 +10,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * A real communication channel. Emulates the node discovery (over the Internet).
@@ -68,6 +72,16 @@ public class SocketCommunicationChannel extends Thread implements CommunicationC
     listeningThread.start();
   }
 
+  public void nodeChange(ActuatorInfo actuatorInfo, SensorInfo sensorInfo) {
+    Timer timer = new Timer();
+    timer.schedule(new TimerTask() {
+      @Override
+      public void run() {
+        System.out.println("Spawning node " + specification);
+        logic.onNodeAdded(nodeInfo);
+      }
+    }, delay * 1000L);
+  }
 
   private void close() {
     try {
